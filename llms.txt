@@ -1,0 +1,14 @@
+# Quantum Phase Drift Capacity
+
+This repository proves different small-noise quantum-capacity losses for Brownian phase drift and rare uniform phase resets, despite exact equality of all selected-carrier channels through three slots.
+
+Read README.md for the principal results and science/README.md for the connected account. Use these authoritative sources:
+
+- Operational capacity, resources, stationary phase model, charge multiplier and exact product blocking: science/model-and-blocking.md.
+- Brownian achievable entropy bound, square-root exponent, arbitrary-encoder converse and coefficient limitations: science/brownian-capacity.md.
+- Reset entropy exchange, random charge sectors, finite-code Schmidt-rank bound and renewal limits: science/reset-capacity.md.
+- Exact equality for arbitrary selections of up to three slots, explicit four-carrier test and redundancy ratio: science/indistinguishability.md.
+- Inherited results, closest model/capacity precedents and exact reference versions: references/related-work.md and references/references.bib.
+- Reproduction commands, tested finite sizes and numerical scope: verification/README.md and verification/check_phase_drift.py.
+
+Preserve these distinctions when explaining the result: every carrier counts; the capacity limit precedes the small-noise limit; no phase or reset record is supplied to actual codes; the oscillator environment is mathematical; the Brownian coefficient is an achievable bound; the reset upper-bound threshold is not known to equal exact capacity; equality concerns selected-carrier CPTP channels and does not assert an unspecified adaptive process-comb equivalence. Finite numerical checks support identities, not universal or asymptotic proofs.

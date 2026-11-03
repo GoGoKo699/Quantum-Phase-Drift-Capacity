@@ -1,0 +1,381 @@
+{
+  "scope": "Finite algebra, covariance, and entropy diagnostics; no numerical inference of asymptotic capacity.",
+  "versions": {
+    "python": "3.12.14",
+    "numpy": "2.3.5",
+    "scipy": "1.17.0"
+  },
+  "tolerances": {
+    "algebra": 1e-12,
+    "entropy": 1e-10,
+    "integral": 1e-06
+  },
+  "up_to_three_slots": [
+    {
+      "n": 1,
+      "kappa": 0.001,
+      "gaps": [],
+      "max_difference": 0.0
+    },
+    {
+      "n": 1,
+      "kappa": 0.1,
+      "gaps": [],
+      "max_difference": 0.0
+    },
+    {
+      "n": 1,
+      "kappa": 0.7,
+      "gaps": [],
+      "max_difference": 0.0
+    },
+    {
+      "n": 2,
+      "kappa": 0.001,
+      "gaps": [
+        2
+      ],
+      "max_difference": 0.0
+    },
+    {
+      "n": 2,
+      "kappa": 0.1,
+      "gaps": [
+        2
+      ],
+      "max_difference": 0.0
+    },
+    {
+      "n": 2,
+      "kappa": 0.7,
+      "gaps": [
+        2
+      ],
+      "max_difference": 0.0
+    },
+    {
+      "n": 3,
+      "kappa": 0.001,
+      "gaps": [
+        2,
+        3
+      ],
+      "max_difference": 0.0
+    },
+    {
+      "n": 3,
+      "kappa": 0.1,
+      "gaps": [
+        2,
+        3
+      ],
+      "max_difference": 0.0
+    },
+    {
+      "n": 3,
+      "kappa": 0.7,
+      "gaps": [
+        2,
+        3
+      ],
+      "max_difference": 0.0
+    }
+  ],
+  "four_slot_witness": {
+    "kappa": 0.2,
+    "brownian": 0.5488116360940264,
+    "reset": 0.7408182206817179,
+    "specified_probe_success_probability": 0.5480016461469228
+  },
+  "independent_block_twirling": [
+    {
+      "kind": "brownian",
+      "blocks": [
+        1,
+        2
+      ],
+      "max_difference": 0.0
+    },
+    {
+      "kind": "brownian",
+      "blocks": [
+        2,
+        2
+      ],
+      "max_difference": 0.0
+    },
+    {
+      "kind": "brownian",
+      "blocks": [
+        2,
+        3
+      ],
+      "max_difference": 0.0
+    },
+    {
+      "kind": "reset",
+      "blocks": [
+        1,
+        2
+      ],
+      "max_difference": 0.0
+    },
+    {
+      "kind": "reset",
+      "blocks": [
+        2,
+        2
+      ],
+      "max_difference": 0.0
+    },
+    {
+      "kind": "reset",
+      "blocks": [
+        2,
+        3
+      ],
+      "max_difference": 0.0
+    }
+  ],
+  "entropy_bounds": [
+    {
+      "n": 2,
+      "kappa": 0.01,
+      "environment_entropy_bits": 1.5125789714905846,
+      "gaussian_bound_bits": 1.5676022349427996
+    },
+    {
+      "n": 2,
+      "kappa": 0.1,
+      "environment_entropy_bits": 1.582700328481389,
+      "gaussian_bound_bits": 1.9167660055214468
+    },
+    {
+      "n": 2,
+      "kappa": 0.5,
+      "environment_entropy_bits": 1.7508609566874709,
+      "gaussian_bound_bits": 2.6955634146245644
+    },
+    {
+      "n": 3,
+      "kappa": 0.01,
+      "environment_entropy_bits": 1.844719554166691,
+      "gaussian_bound_bits": 1.9345253230071244
+    },
+    {
+      "n": 3,
+      "kappa": 0.1,
+      "environment_entropy_bits": 2.0288408972163996,
+      "gaussian_bound_bits": 2.522339576232101
+    },
+    {
+      "n": 3,
+      "kappa": 0.5,
+      "environment_entropy_bits": 2.4495380562602684,
+      "gaussian_bound_bits": 3.71025512815586
+    },
+    {
+      "n": 4,
+      "kappa": 0.01,
+      "environment_entropy_bits": 2.091385730598556,
+      "gaussian_bound_bits": 2.2200705112077377
+    },
+    {
+      "n": 4,
+      "kappa": 0.1,
+      "environment_entropy_bits": 2.4182340047963042,
+      "gaussian_bound_bits": 3.0587266411011798
+    },
+    {
+      "n": 4,
+      "kappa": 0.5,
+      "environment_entropy_bits": 3.1334587868552517,
+      "gaussian_bound_bits": 4.640345934738113
+    },
+    {
+      "n": 6,
+      "kappa": 0.01,
+      "environment_entropy_bits": 2.4647512935801963,
+      "gaussian_bound_bits": 2.6791891578800766
+    },
+    {
+      "n": 6,
+      "kappa": 0.1,
+      "environment_entropy_bits": 3.1335866536136727,
+      "gaussian_bound_bits": 4.024483727441067
+    },
+    {
+      "n": 6,
+      "kappa": 0.5,
+      "environment_entropy_bits": 4.491397518285572,
+      "gaussian_bound_bits": 6.368154403850092
+    }
+  ],
+  "bridge_moments": [
+    {
+      "L": 2,
+      "kappa": 0.3333333333333333,
+      "mean_Z": 0.08333333333333333,
+      "second_Z": 0.013888888888888888,
+      "purity": 0.923240862445307
+    },
+    {
+      "L": 3,
+      "kappa": 0.125,
+      "mean_Z": 0.08333333333333334,
+      "second_Z": 0.01215277777777778,
+      "purity": 0.9223778570272526
+    },
+    {
+      "L": 4,
+      "kappa": 0.06666666666666667,
+      "mean_Z": 0.08333333333333334,
+      "second_Z": 0.011805555555555559,
+      "purity": 0.9222027820756838
+    },
+    {
+      "L": 6,
+      "kappa": 0.02857142857142857,
+      "mean_Z": 0.08333333333333334,
+      "second_Z": 0.011746031746031747,
+      "purity": 0.922159358463252
+    }
+  ],
+  "brownian_covariance_degradation": [
+    {
+      "n": 2,
+      "L": 2,
+      "kappa": 0.03,
+      "complete_blocks": 1,
+      "tail_slots": 0,
+      "bridge_covariance_max_difference": 0.0,
+      "bridge_post_cross_covariance_max": 0.0,
+      "covariance_reconstruction_max_difference": 0.0,
+      "minimum_bridge_covariance_eigenvalue": 0.0,
+      "minimum_post_covariance_eigenvalue": 0.0,
+      "channel_max_difference": 0.0
+    },
+    {
+      "n": 5,
+      "L": 2,
+      "kappa": 0.2,
+      "complete_blocks": 2,
+      "tail_slots": 1,
+      "bridge_covariance_max_difference": 0.0,
+      "bridge_post_cross_covariance_max": 0.0,
+      "covariance_reconstruction_max_difference": 1.1102230246251565e-16,
+      "minimum_bridge_covariance_eigenvalue": 0.0,
+      "minimum_post_covariance_eigenvalue": -3.360995886067035e-17,
+      "channel_max_difference": 1.1102230246251565e-16
+    },
+    {
+      "n": 6,
+      "L": 3,
+      "kappa": 0.5,
+      "complete_blocks": 2,
+      "tail_slots": 0,
+      "bridge_covariance_max_difference": 5.551115123125783e-17,
+      "bridge_post_cross_covariance_max": 5.551115123125783e-17,
+      "covariance_reconstruction_max_difference": 2.220446049250313e-16,
+      "minimum_bridge_covariance_eigenvalue": 0.0,
+      "minimum_post_covariance_eigenvalue": -3.294557759068193e-16,
+      "channel_max_difference": 2.220446049250313e-16
+    },
+    {
+      "n": 7,
+      "L": 3,
+      "kappa": 0.07,
+      "complete_blocks": 2,
+      "tail_slots": 1,
+      "bridge_covariance_max_difference": 6.938893903907228e-18,
+      "bridge_post_cross_covariance_max": 6.938893903907228e-18,
+      "covariance_reconstruction_max_difference": 5.551115123125783e-17,
+      "minimum_bridge_covariance_eigenvalue": 0.0,
+      "minimum_post_covariance_eigenvalue": -8.532678992320038e-17,
+      "channel_max_difference": 1.1102230246251565e-16
+    }
+  ],
+  "reset_pattern_enumeration": [
+    {
+      "n": 1,
+      "p": 0.1,
+      "reset_patterns": 1,
+      "environment_dimension": 2,
+      "channel_max_difference": 0.0,
+      "environment_gram_max_difference": 0.0,
+      "minimum_environment_eigenvalue": 0.5,
+      "environment_entropy_bits": 1.0,
+      "pinched_entropy_bits": 1.0,
+      "analytical_entropy_upper_bound_bits": 1.0,
+      "pinched_entropy_formula_difference": 0.0,
+      "entropy_bound_slack_bits": 0.0
+    },
+    {
+      "n": 2,
+      "p": 0.05,
+      "reset_patterns": 2,
+      "environment_dimension": 7,
+      "channel_max_difference": 0.0,
+      "environment_gram_max_difference": 1.1102230246251565e-16,
+      "minimum_environment_eigenvalue": 6.159690547119354e-18,
+      "environment_entropy_bits": 1.5843304657483364,
+      "pinched_entropy_bits": 1.811396957115956,
+      "analytical_entropy_upper_bound_bits": 1.811396957115956,
+      "pinched_entropy_formula_difference": 0.0,
+      "entropy_bound_slack_bits": 0.2270664913676197
+    },
+    {
+      "n": 4,
+      "p": 0.2,
+      "reset_patterns": 8,
+      "environment_dimension": 82,
+      "channel_max_difference": 2.220446049250313e-16,
+      "environment_gram_max_difference": 0.0,
+      "minimum_environment_eigenvalue": -5.553126017920399e-17,
+      "environment_entropy_bits": 3.0660030333514494,
+      "pinched_entropy_bits": 4.677158684385164,
+      "analytical_entropy_upper_bound_bits": 4.677158684385164,
+      "pinched_entropy_formula_difference": 0.0,
+      "entropy_bound_slack_bits": 1.6111556510337146
+    },
+    {
+      "n": 5,
+      "p": 0.6,
+      "reset_patterns": 16,
+      "environment_dimension": 280,
+      "channel_max_difference": 2.220446049250313e-16,
+      "environment_gram_max_difference": 2.220446049250313e-16,
+      "minimum_environment_eigenvalue": -2.661015464695773e-17,
+      "environment_entropy_bits": 4.752239757979944,
+      "pinched_entropy_bits": 7.980124203385607,
+      "analytical_entropy_upper_bound_bits": 7.980124203385608,
+      "pinched_entropy_formula_difference": 8.881784197001252e-16,
+      "entropy_bound_slack_bits": 3.227884445405663
+    }
+  ],
+  "asymptotic_integral": {
+    "value_bits": 3.559707331246877,
+    "target_bits": 3.559707331246876,
+    "estimated_error": 1.1757927964595183e-10,
+    "absolute_difference": 8.881784197001252e-16,
+    "coefficient_bound": 1.1330900354567988
+  },
+  "limitations": [
+    "Finite selected cases do not prove the universal channel identities.",
+    "Entropy upper bounds and conservative converse constants are not optimal capacities.",
+    "Quadrature checks an analytically derived integral; it is not an asymptotic proof.",
+    "No coding simulation, capacity fit, or uniform finite-length/small-noise claim is made."
+  ],
+  "case_counts": {
+    "selected_slot_kernels": 9,
+    "block_factorizations": 6,
+    "gaussian_entropy_bounds": 12,
+    "bridge_moments": 4,
+    "four_slot_witnesses": 1,
+    "asymptotic_integrals": 1,
+    "brownian_covariance_degradations": 4,
+    "reset_pattern_enumerations": 4,
+    "total": 41
+  },
+  "status": "passed"
+}
