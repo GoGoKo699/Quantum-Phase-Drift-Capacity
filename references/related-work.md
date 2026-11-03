@@ -111,3 +111,9 @@ Local operations cannot increase Schmidt number, and overlap with an $M$-dimensi
 S. D. Bartlett, T. Rudolph, and R. W. Spekkens, **Reference frames, superselection rules, and quantum information**, *Reviews of Modern Physics* **79**, 555–609 (2007). [DOI](https://doi.org/10.1103/RevModPhys.79.555), [arXiv:quant-ph/0610030v3](https://arxiv.org/html/quant-ph/0610030v3), Sections II and III.A.
 
 This review explains phase twirling, charge sectors and communication without a shared reference frame. Those concepts are background for the present temporal noise problem. All finite-sector identities needed by the reset proof are derived in the repository.
+
+## Educational anchor
+
+John Preskill, **Quantum Information, Chapter 10: Quantum Shannon Theory**, updated June 2025. [Official author-hosted PDF](https://www.preskill.caltech.edu/ph219/chap10_6A_2025.pdf).
+
+This is the single anchor for the [learning route](../learning/README.md). Its entropy and quantum-capacity framework is connected to the project's exact blocking, Gaussian entropy, bridge and renewal arguments in the [source-to-project bridge](../learning/anchor-and-bridge.md). The research citations above retain their roles in attribution and proof dependencies.

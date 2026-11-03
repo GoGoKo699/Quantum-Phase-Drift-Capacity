@@ -41,6 +41,12 @@ Start with the [scientific overview](science/README.md), or go directly to the q
 
 The [LLM reading guide](llms.txt) maps further questions to these same sources.
 
+## Learn the argument
+
+The [learning route](learning/README.md) uses **Preskill's _Quantum Shannon Theory_, updated June 2025**, as its single educational anchor. The [source-to-project bridge](learning/anchor-and-bridge.md) connects entropy and channel capacity to the phase-noise model through a worked example and a notation guide.
+
+The [30-milestone map](learning/milestones.md) develops 12 background targets and 18 targets through the project's arguments. Each milestone identifies its central question, dependencies, conceptual connection and scientific sources. The route ends by connecting the two capacity laws, the few-carrier experiments and the limits of the result.
+
 ## How the bounds work
 
 For achievability, an exact total-charge twirl makes successive coding blocks independent without resetting the physical phase process. A mathematical coherent-state dilation and Gaussian maximum entropy bound then control the Brownian environment's entropy.
