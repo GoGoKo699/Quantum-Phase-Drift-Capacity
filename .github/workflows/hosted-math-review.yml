@@ -1,0 +1,47 @@
+name: Hosted mathematical rendering review
+
+on:
+  push:
+    branches:
+      - merlin-phase-drift-hosted-20261103
+
+permissions:
+  contents: read
+
+concurrency:
+  group: phase-drift-hosted-review
+  cancel-in-progress: false
+
+jobs:
+  hosted-math:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    env:
+      SOURCE_COMMIT: c0c0da2fac44f744e1813e2092e666fad0594dbd
+    steps:
+      - name: Read the public source and verification helpers
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - name: Set up Node
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        with:
+          node-version: '24'
+      - name: Install isolated capture dependencies
+        shell: bash
+        run: |
+          npm install --prefix "$RUNNER_TEMP/phase-drift-deps" playwright@1.56.1 mathjax-full@3.2.1
+          PLAYWRIGHT_BROWSERS_PATH="$RUNNER_TEMP/phase-drift-browsers" "$RUNNER_TEMP/phase-drift-deps/node_modules/.bin/playwright" install --with-deps chromium --only-shell
+      - name: Compare every hosted expression at both viewport widths
+        shell: bash
+        run: |
+          NODE_PATH="$RUNNER_TEMP/phase-drift-deps/node_modules" PLAYWRIGHT_BROWSERS_PATH="$RUNNER_TEMP/phase-drift-browsers" node _verification_helpers/capture_hosted_math.cjs --root "$GITHUB_WORKSPACE" --repository GoGoKo699/Quantum-Phase-Drift-Capacity --revision "$SOURCE_COMMIT" --output "$RUNNER_TEMP/phase-drift-hosted"
+      - name: Preserve the actual report and captures
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: phase-drift-hosted-c0c0da2fac44f744e1813e2092e666fad0594dbd
+          path: ${{ runner.temp }}/phase-drift-hosted
+          if-no-files-found: error
+          retention-days: 7
