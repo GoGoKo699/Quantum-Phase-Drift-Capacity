@@ -17,7 +17,7 @@ jobs:
     runs-on: ubuntu-24.04
     timeout-minutes: 15
     env:
-      SOURCE_COMMIT: c0c0da2fac44f744e1813e2092e666fad0594dbd
+      SOURCE_COMMIT: 0090166f2805088fb8bb13fdd9057516e61fe466
     steps:
       - name: Read the public source and verification helpers
         uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
@@ -41,7 +41,7 @@ jobs:
         if: always()
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         with:
-          name: phase-drift-hosted-c0c0da2fac44f744e1813e2092e666fad0594dbd
+          name: phase-drift-hosted-0090166f2805088fb8bb13fdd9057516e61fe466
           path: ${{ runner.temp }}/phase-drift-hosted
           if-no-files-found: error
           retention-days: 7
