@@ -1,14 +1,17 @@
 # Quantum Phase Drift Capacity
 
-This repository proves different small-noise quantum-capacity losses for Brownian phase drift and rare uniform phase resets, despite exact equality of all selected-carrier channels through three slots.
+The scientific question is how phase dynamics set the optimal redundancy of a qubit train. Brownian drift and rare uniform resets have different small-noise quantum-capacity losses even though their complete selected-carrier channels agree through three slots.
 
-Read README.md for the principal results and science/README.md for the connected account. Use these authoritative sources:
+## Choose a reading route
 
-- Operational capacity, resources, stationary phase model, charge multiplier and exact product blocking: science/model-and-blocking.md.
-- Brownian achievable entropy bound, square-root exponent, arbitrary-encoder converse and coefficient limitations: science/brownian-capacity.md.
-- Reset entropy exchange, random charge sectors, finite-code Schmidt-rank bound and renewal limits: science/reset-capacity.md.
-- Exact equality for arbitrary selections of up to three slots, explicit four-carrier test and redundancy ratio: science/indistinguishability.md.
-- Inherited results, closest model/capacity precedents and exact reference versions: references/related-work.md and references/references.bib.
-- Reproduction commands, tested finite sizes and numerical scope: verification/README.md and verification/check_phase_drift.py.
+- Story: README.md states the question and results; science/README.md connects the mechanisms and physical interpretation.
+- Study: learning/README.md introduces the one selected anchor, John Preskill's Quantum Information Chapter 10, Quantum Shannon Theory, updated June 2025. learning/anchor-and-bridge.md maps source sections and notation to the project. learning/milestones.md is the shared map of exactly 30 targets: 12 background/preliminaries and 18 narrative/innovation milestones, with dependencies and sources.
+- Theorems and proofs: science/model-and-blocking.md fixes the channel, resources and operational capacity and proves exact product blocking. science/brownian-capacity.md gives the achievable entropy bound, arbitrary-encoder converse and coefficient limitations. science/reset-capacity.md gives coherent-environment pinching, finite-code Schmidt-rank bounds and renewal limits. science/indistinguishability.md proves equality through three selected slots, the four-slot diagnostic and the redundancy ratio.
+- Reproduction: verification/README.md documents the finite diagnostics, parameters and limits; verification/check_phase_drift.py is the runnable source and verification/expected-results.json records the reference output.
+- Attribution: references/related-work.md compares the closest precedents and imported ingredients; references/references.bib contains structured bibliographic entries. Primary research references supplement the single educational anchor.
 
-Preserve these distinctions when explaining the result: every carrier counts; the capacity limit precedes the small-noise limit; no phase or reset record is supplied to actual codes; the oscillator environment is mathematical; the Brownian coefficient is an achievable bound; the reset upper-bound threshold is not known to equal exact capacity; equality concerns selected-carrier CPTP channels and does not assert an unspecified adaptive process-comb equivalence. Finite numerical checks support identities, not universal or asymptotic proofs.
+Use the authoritative topic pages for exact claims. The learning bridge explains their connections without replacing the full proofs.
+
+## Preserve the scientific distinctions
+
+Every physical carrier counts, including pilots and padding. The capacity limit precedes the small-noise limit. Neither a phase trajectory nor a reset record is supplied to actual codes. The oscillator environment is mathematical, and cleaner channels are converse devices. The Brownian coefficient is an achievable bound; the reset fidelity-decay threshold is not known to equal exact capacity. Equality concerns the specified selected-carrier CPTP channels with passive references, not an unspecified adaptive process interface. Finite numerical checks support identities, not universal or asymptotic proofs. Exact leading coefficients, efficient codes and assisted/noisy extensions remain outside the established result.
