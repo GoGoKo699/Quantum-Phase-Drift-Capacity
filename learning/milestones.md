@@ -23,7 +23,7 @@ Dependencies name earlier milestones only. They indicate which ideas a target us
 
 **Central question.** What does averaging an unknown phase do to a single qubit?
 
-**Understanding target.** Explain how the rotation $U(\theta)=\operatorname{diag}(1,e^{i\theta})$ preserves populations while changing coherence, and why a uniform phase removes the single-carrier off-diagonal terms. Distinguish an unknown rotation from loss of the physical carrier.
+**Understanding target.** Explain how the rotation $U(\theta)=\mathrm{diag}(1,e^{i\theta})$ preserves populations while changing coherence, and why a uniform phase removes the single-carrier off-diagonal terms. Distinguish an unknown rotation from loss of the physical carrier.
 
 **Dependencies and story role.** No earlier milestone. This fixes the local physical action before introducing a train.
 
