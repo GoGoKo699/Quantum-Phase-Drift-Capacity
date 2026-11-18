@@ -36,7 +36,7 @@ Compare both hypotheses to the same common-phase twirl $`\mathcal T`$ in which e
 
 ### Arbitrary inputs
 
-Let $`n_i=|1\rangle\langle1|_i`$, $`Q=\sum_i n_i`$ and $`S_j=\sum_{i>j}n_i`$. Averaging the independent Gaussian increments factors the Brownian channel into $`\mathcal T`$ followed by the commuting channels $`\exp[-(\kappa/2)\operatorname{ad}(S_j)^2]`$, where $`\operatorname{ad}(S)(X)=[S,X]`$. After $`\mathcal T`$ only equal-$`Q`$ blocks remain. In any such block the spectral width of $`S_j`$ is at most $`w_j=\min(j,N-j)`$. Indeed, the suffix count in charge-$`q`$ ranges from $`\max(0,q-j)`$ to $`\min(q,N-j)`$. Subtracting the sector midpoint as a function of $`Q`$ therefore preserves the action on the twirled operators and gives a generator with operator norm at most $`w_j/2`$.
+Let $`n_i=|1\rangle\langle1|_i`$, $`Q=\sum_i n_i`$ and $`S_j=\sum_{i>j}n_i`$. Averaging the independent Gaussian increments factors the Brownian channel into $`\mathcal T`$ followed by the commuting channels $`\exp[-(\kappa/2)\mathrm{ad}(S_j)^2]`$, where $`\mathrm{ad}(S)(X)=[S,X]`$. After $`\mathcal T`$ only equal-$`Q`$ blocks remain. In any such block the spectral width of $`S_j`$ is at most $`w_j=\min(j,N-j)`$. Indeed, the suffix count in charge-$`q`$ ranges from $`\max(0,q-j)`$ to $`\min(q,N-j)`$. Subtracting the sector midpoint as a function of $`Q`$ therefore preserves the action on the twirled operators and gives a generator with operator norm at most $`w_j/2`$.
 
 For a centered generator of that norm, the trace norm of its commutator on a joint carrier-reference operator is bounded by $`w_j`$ times the input norm. The Gaussian channel is a mixture of unitaries and is contractive in the same norm. Integrating its generator and telescoping the channels gives
 
@@ -52,11 +52,11 @@ Adding the reset bound shows that constant trace distance requires $`\kappa N^3`
 Fix a Brownian trajectory and set $`\delta_j=\theta_j-\theta_1`$ on its real lift. A pure group probe with private reference undergoes the relative unitary $`e^{iA_G}`$, where $`A_G=\sum_{j\in G}\delta_j n_j`$. With an independent copy of the spectral random variable of $`A_G`$ in this probe and $`1-\cos t\le t^2/2`$,
 
 ```math
-1-|\langle e^{iA_G}\rangle|^2\le\operatorname{Var}(A_G)
+1-|\langle e^{iA_G}\rangle|^2\le\mathrm{Var}(A_G)
 \le\frac{|G|}{4}\sum_{j\in G}\delta_j^2.
 ```
 
-The last step uses the triangle inequality for centered number operators applied to the probe, $`\operatorname{Var}(n_j)\le1/4`$, and Cauchy–Schwarz. For a product over groups the loss of squared overlap is at most the sum of group losses. The pure-state trace distance is the square root of this loss. Averaging by convexity and Jensen, and using $`\mathbb E\delta_j^2=\kappa(j-1)`$, bounds the trace distance to the twirl by $`\sqrt{\kappa\min(d,N)N(N-1)/8}`$. Partial trace of private purifications and averaging over mixtures preserve the bound. The real lift is valid because the physical rotations are periodic. The reset term adds at most $`\kappa(N-1)/2`$. Together these bounds force $`\kappa dN^2`$ to be bounded below for fixed error.
+The last step uses the triangle inequality for centered number operators applied to the probe, $`\mathrm{Var}(n_j)\le1/4`$, and Cauchy–Schwarz. For a product over groups the loss of squared overlap is at most the sum of group losses. The pure-state trace distance is the square root of this loss. Averaging by convexity and Jensen, and using $`\mathbb E\delta_j^2=\kappa(j-1)`$, bounds the trace distance to the twirl by $`\sqrt{\kappa\min(d,N)N(N-1)/8}`$. Partial trace of private purifications and averaging over mixtures preserve the bound. The real lift is valid because the physical rotations are periodic. The reset term adds at most $`\kappa(N-1)/2`$. Together these bounds force $`\kappa dN^2`$ to be bounded below for fixed error.
 
 ## Attaining the law
 
@@ -86,11 +86,11 @@ Conditional on a trajectory the minus outcomes are independent across disjoint g
 \mathbb E X^2\le\mu+\frac{3}{16}(rv)^2\le\mu+12\mu^2.
 ```
 
-Cauchy–Schwarz applied to $`X\mathbf1_{X>0}`$ now gives $`\Pr_{\mathrm B}(X>0)\ge1/24`$. In a no-reset window the phase is common and the minus outcomes are absent. Thus the probability of a false reset-to-Brownian declaration is bounded above by the probability of any reset. Since $`N=\Theta((\kappa m)^{-1/2})`$ with $`m`$ of order $`\min(d,\kappa^{-1/3})`$, the window has the desired length.
+Cauchy–Schwarz applied to $`X\mathbf1_{X>0}`$ now gives $`\Pr_{\mathrm B}(X>0)\ge1/24`$. In a no-reset window the phase is common and the minus outcomes are absent. Thus the probability of a false Brownian declaration under resets is bounded above by the probability of any reset. Since $`N=\Theta((\kappa m)^{-1/2})`$ with $`m`$ of order $`\min(d,\kappa^{-1/3})`$, the window has the desired length.
 
 ### Product input
 
-Use $`N=2r`$ with $`r=\lceil\kappa^{-1/2}\rceil`$ and send $`|+\rangle`$ on every slot. For each $`1\le i\le r`$, test carriers $`i,i+r`$ against the singlet. The singlet probability conditional on the path is $`(1-\cos\Phi_i)/4``, with $`\operatorname{Var}(\Phi_i)=v=\kappa r`$ under Brownian drift. These tests use disjoint pairs and commute with a common phase rotation. A common randomization of the preparation phase gives the same statistics.
+Use $`N=2r`$ with $`r=\lceil\kappa^{-1/2}\rceil`$ and send $`|+\rangle`$ on every slot. For each $`1\le i\le r`$, test carriers $`i,i+r`$ against the singlet. The singlet probability conditional on the path is $`(1-\cos\Phi_i)/4`$, with $`\mathrm{Var}(\Phi_i)=v=\kappa r`$ under Brownian drift. These tests use disjoint pairs and commute with a common phase rotation. A common randomization of the preparation phase gives the same statistics.
 
 Now $`\mu\ge rv/16\ge1/16`$. The conditional probabilities are bounded by $`\Phi_i^2/8`$, giving $`\mathbb E X^2\le\mu+3(rv)^2/64\le\mu+12\mu^2`$ for the singlet count. Consequently $`\Pr_{\mathrm B}(X>0)\ge1/28`$. A no-reset window has zero singlet probability.
 
