@@ -18,7 +18,7 @@ Capacity is defined by entanglement transmission with arbitrary completely posit
 
 For Brownian drift, the theorem identifies the exponent of the optimal deficit. The Gaussian entropy estimate also supplies an achievable coefficient. It does not prove that a uniform input is globally optimal or determine the exact coefficient. For resets, the upper and lower bounds have matching order but different logarithmic coefficients. The explicit fidelity-decay threshold in the reset converse is an upper bound on capacity, rather than a claimed exact strong-converse threshold.
 
-For discrimination, the $N$ carriers are consecutive, with one pass per carrier and no feedback. The two matched parameter values are supplied. At fixed error, the shortest train with input entanglement depth at most $d$ has order $\max\{\kappa^{-1/3},(\kappa d)^{-1/2}\}$. Depth constrains the input groups and their private references. The receiver can measure jointly. The capacity law quantifies the coding overhead for each process. The discrimination law quantifies the train needed to identify which process applies.
+For discrimination, the $N$ carriers are consecutive, with one pass per carrier and no feedback. The two matched parameter values are supplied. At fixed error, the shortest train with input entanglement depth at most $d$ has order $\max\left(\kappa^{-1/3},(\kappa d)^{-1/2}\right)$. Depth constrains the input groups and their private references. The receiver can measure jointly. The capacity law quantifies the coding overhead for each process. The discrimination law quantifies the train needed to identify which process applies.
 
 ## Physical interpretation
 

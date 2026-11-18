@@ -237,8 +237,8 @@ Every branch has Schmidt rank at most
 $`\mathrm{rank}(P_{R,\mathbf w})\le D_R`$.
 This remains true with mixed local ancillas, discarded encoder environments, or a nonisometric encoder, since all are included by a Kraus representation. Decoder operations act on one side of the reference–receiver partition and cannot increase the branch Schmidt rank. The normalized decoded state thus has Schmidt number at most $`\min\lbrace M,D_R\rbrace `$.
 
-For a normalized pure state of Schmidt rank at most $`D`$, its overlap with an $`M`$-dimensional maximally entangled state is at most $`D/M`$. One direct proof writes the state's coefficient matrix as $`C`$: $`\|C\|_F=1`$, $`\mathrm{rank}\,C\le D`$, and
-$`|\mathrm{Tr}\,C|^2/M\le\|C\|_*^2/M\le D/M`$.
+For a normalized pure state of Schmidt rank at most $`D`$, its overlap with an $`M`$-dimensional maximally entangled state is at most $`D/M`$. One direct proof writes the state's coefficient matrix as $`C`$: $`\lVert C\rVert_F=1`$, $`\mathrm{rank}\,C\le D`$, and
+$`|\mathrm{Tr}\,C|^2/M\le\lVert C\rVert_*^2/M\le D/M`$.
 Convexity extends the same estimate to every mixed state of Schmidt number at most $`D`$. This standard singlet-fraction inequality is Lemma 1 of [TH](../references/related-work.md#th); our branch argument specifies why it applies to unrestricted encoders here.
 
 The conditional fidelity and its average therefore obey

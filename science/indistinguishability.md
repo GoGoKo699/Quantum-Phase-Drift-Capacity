@@ -109,7 +109,7 @@ This is a physical four-carrier preparation and measurement. One explicit implem
 The output trace distance and equal-prior single-trial success probability for this probe are
 
 ```math
-\frac12\|\rho_{\mathrm R}-\rho_{\mathrm B}\|_1
+\frac12\lVert \rho_{\mathrm R}-\rho_{\mathrm B}\rVert_1
   =\frac{e^{-3\kappa/2}-e^{-3\kappa}}2,
  \qquad
  P_{\mathrm{succ}}

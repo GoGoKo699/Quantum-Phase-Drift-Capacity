@@ -741,7 +741,7 @@ I_c(\rho_p,\mathcal B_{L,\kappa})
 If $`D_2(p\Vert u)\lt \delta`$, Pinsker's inequality gives
 
 ```math
-\|p-u\|_1\le\sqrt{2\ln2\,\delta}=\frac{a_0}{4}.
+\lVert p-u\rVert_1\le\sqrt{2\ln2\,\delta}=\frac{a_0}{4}.
 \qquad\text{(B56)}
 ```
 
@@ -751,8 +751,8 @@ The preparation map $`p\mapsto\rho_E(p)`$ contracts this norm, and purity is dim
 \begin{aligned}
 &\left|\mathrm{Tr}\,\rho_E(p)^2
 -\mathrm{Tr}\,\rho_E(u)^2\right|\\
-&\quad\le2\|\rho_E(p)-\rho_E(u)\|_1\\
-&\quad\le2\|p-u\|_1
+&\quad\le2\lVert \rho_E(p)-\rho_E(u)\rVert_1\\
+&\quad\le2\lVert p-u\rVert_1
 \le\frac{a_0}{2}.
 \end{aligned}
 \qquad\text{(B57)}
@@ -760,7 +760,7 @@ The preparation map $`p\mapsto\rho_E(p)`$ contracts this norm, and purity is dim
 
 For the first inequality, apply trace-norm/operator-norm duality to
 $`\mathrm{Tr}[(\rho-\sigma)(\rho+\sigma)]`$, and use
-$`\|\rho+\sigma\|_\infty\le2`$.
+$`\lVert \rho+\sigma\rVert_\infty\le2`$.
 
 Equations (B53) and (B57) give
 
