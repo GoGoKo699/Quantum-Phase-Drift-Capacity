@@ -1,10 +1,10 @@
 # Quantum Phase Drift Capacity
 
-How much redundancy is needed to transmit quantum information through a slowly drifting phase, and how much can short-carrier experiments reveal about that cost?
+How much redundancy does a drifting phase impose on quantum communication, and how many carriers does it take to tell drift from random resets?
 
-This repository studies a train of qubits subject to a stationary, unknown phase process. Two fully mixing processes have exactly the same channel on every selection of at most three carrier slots, yet their optimal communication-capacity losses have different small-noise orders.
+This repository studies a train of qubits subject to a stationary, unknown phase process. Brownian phase drift and random phase resets have identical channels on every selection of at most three carrier slots. They produce different capacity losses, and the number of carriers needed to distinguish them depends on how many can be entangled in the input.
 
-## Principal results
+## Quantum communication capacity
 
 One qubit is transmitted in each equally spaced slot. The initial phase is uniform, the phase trajectory is inaccessible, and the encoder and decoder may act collectively on the whole train. Every carrier is counted. Let $Q$ denote unassisted quantum capacity in logical qubits per transmitted qubit.
 
@@ -22,9 +22,20 @@ Choose $p=1-e^{-\kappa/2}$. The two models then have the same first-harmonic cor
 \longrightarrow\infty.
 ```
 
-Four consecutive carriers distinguish the models. The coherence between $0011$ and $1100$ decays by $e^{-3\kappa}$ under Brownian drift and by $e^{-3\kappa/2}$ under resets. An explicit preparation and measurement are given in the [comparison](science/indistinguishability.md).
+These capacity laws take the train-length limit at fixed noise before the small-noise limit. They determine the orders of the optimal deficits.
 
-These are statements about the optimal asymptotic rate under the specified resource model. The train-length limit is taken at a fixed noise parameter before the small-noise limit. Exact optimal coefficients and efficient finite-length codes are not determined.
+## How many carriers distinguish the processes?
+
+The [four-carrier test](science/indistinguishability.md#2-four-carriers-provide-an-explicit-diagnostic) measures the coherence between $0011$ and $1100$. For four consecutive carriers, it decays by $e^{-3\kappa}$ under Brownian drift and by $e^{-3\kappa/2}$ under resets. The same two-string probe is [optimal on any four fixed selected slots](science/discrimination-and-depth.md#exact-four-carrier-optimum), including when the receiver has a passive reference. Its success probability tends to one half as the noise weakens on four consecutive slots.
+
+For the known matched hypotheses above, the [minimum number of consecutive carriers](science/discrimination-and-depth.md#fixed-error-resource-law) at fixed error $\varepsilon\in(0,1/2)$ and input entanglement depth at most $d$ is
+
+```math
+N_\varepsilon(\kappa,d)
+=\Theta_\varepsilon\!\left(\max\left\{\kappa^{-1/3},(\kappa d)^{-1/2}\right\}\right).
+```
+
+The constants are uniform in $d$. Depth one requires order $\kappa^{-1/2}$ carriers. Unrestricted probes reach order $\kappa^{-1/3}$, and depth of order $\kappa^{-1/3}$ already attains that scale. The test uses one pass through a fixed train and permits joint readout. Depth limits the size of the entangled input groups, with any retained reference private to its group.
 
 ## Read the science
 
@@ -35,7 +46,8 @@ Start with the [scientific overview](science/README.md), or go directly to the q
 | What is the channel, which resources count, and how is capacity defined? | [Model and exact block factorization](science/model-and-blocking.md) |
 | Why is the Brownian deficit of square-root order for every code? | [Brownian capacity](science/brownian-capacity.md) |
 | What changes when the phase is held constant between random resets? | [Reset capacity](science/reset-capacity.md) |
-| Why do all channels through three slots agree, and how do four distinguish them? | [Indistinguishability and capacity separation](science/indistinguishability.md) |
+| Why do all channels through three slots agree? | [Indistinguishability and capacity separation](science/indistinguishability.md) |
+| How many carriers and how much input entanglement give a fixed error? | [Discrimination and entanglement depth](science/discrimination-and-depth.md) |
 | Which ingredients are inherited, and what is the specific addition? | [Related work and references](references/related-work.md) |
 | How can the finite algebraic and entropy checks be reproduced? | [Verification](verification/README.md) |
 
@@ -45,7 +57,7 @@ The [LLM reading guide](llms.txt) maps further questions to these same sources.
 
 The [learning route](learning/README.md) uses **Preskill's _Quantum Shannon Theory_, updated June 2025**, as its single educational anchor. The [source-to-project bridge](learning/anchor-and-bridge.md) connects entropy and channel capacity to the phase-noise model through a worked example and a notation guide.
 
-The [30-milestone map](learning/milestones.md) develops 12 background targets and 18 targets through the project's arguments. Each milestone identifies its central question, dependencies, conceptual connection and scientific sources. The route ends by connecting the two capacity laws, the few-carrier experiments and the limits of the result.
+The [30-milestone map](learning/milestones.md) develops 12 background targets and 18 targets through the project's arguments. Each milestone identifies its central question, dependencies, conceptual connection and scientific sources. The route ends by connecting the two capacity laws, the optimal four-carrier test and the fixed-error tradeoff.
 
 ## How the bounds work
 
@@ -55,11 +67,13 @@ For the Brownian converse, independent bridge blocks form a cleaner channel from
 
 For resets, the environment entropy is bounded using the random segment pattern and its total-charge sectors. A complementary rank argument limits every code: conditional on the reset pattern, each Kraus branch has bounded Schmidt rank. Renewal averages give the logarithmic loss per reset.
 
+For discrimination, the common-phase channel bounds both hypotheses when the train is too short. On a longer train, probes in two halves turn the accumulated phase difference into a measurable signal. Balanced superpositions amplify that signal within their entangled groups. Product probes use paired singlet measurements to detect changes in relative phase.
+
 ## Scope and attribution
 
 The physical model has phase noise only, one two-dimensional carrier per fixed slot, arbitrary local encoding and decoding operations, and no preshared entanglement, feedback, free shared phase reference or extra communication channel. The oscillator dilation is a proof device. Endpoint phases and reset locations are converse aids and are not supplied to the actual coding protocol.
 
-Square-root entropy flow under Brownian phase diffusion already appears in Wiseman's laser-beam analysis. Generalized-dephasing capacity tools, collective-charge encoding and Gaussian entropy extremality are established ingredients. The contribution here is the optimized fixed-qubit capacity law and its comparison with a fully mixing process having identical complete channels through three slots. See the [source-by-source comparison](references/related-work.md); finite diagnostics do not replace the analytical proofs.
+Square-root entropy flow under Brownian phase diffusion already appears in Wiseman's laser-beam analysis. Generalized-dephasing capacity tools, collective-charge encoding and Gaussian entropy extremality are established ingredients. The contribution is the optimized fixed-qubit capacity comparison and the sharp carrier and input-depth requirements for distinguishing the matched processes. See the [source-by-source comparison](references/related-work.md); finite diagnostics do not replace the analytical proofs.
 
 ## Reproduce
 

@@ -365,18 +365,18 @@ Dependencies name earlier milestones only. They indicate which ideas a target us
 
 **Dependencies and story role.** M02, M04, and M28. A realizable diagnostic gives the finite-slot equality an explicit boundary.
 
-**Conceptual connection.** A selected higher-charge coherence probes information absent from lower-slot data. Strict distinguishability does not imply a constant single-trial advantage at vanishing noise or optimality of this probe among all four-carrier inputs.
+**Conceptual connection.** The only unordered pair with a suffix charge of magnitude two at four slots is $0011$ and $1100$. Maximizing that pair's coherence makes the experiment optimal even with a passive reference. For four consecutive slots its single-trial advantage still vanishes with the noise.
 
-**Source pointers.** Preskill §10.6.1 for the measurement-distinguishability viewpoint; [four-carrier diagnostic, §2](../science/indistinguishability.md#2-four-carriers-provide-an-explicit-diagnostic), equations (C7)–(C10).
+**Source pointers.** Preskill §10.6.1 for the measurement-distinguishability viewpoint; [four-carrier diagnostic, §2](../science/indistinguishability.md#2-four-carriers-provide-an-explicit-diagnostic), equations (C7)–(C10); [exact optimum](../science/discrimination-and-depth.md#exact-four-carrier-optimum).
 
-### M30. Synthesis of short-probe equality and long-code separation
+### M30. Synthesis of diagnostic cost and coding redundancy
 
-**Central question.** What does the complete result establish about learning a communication cost from small experiments?
+**Central question.** How does the number of carriers needed to identify a model relate to the redundancy that each model imposes?
 
-**Understanding target.** Combine the two capacity laws at matched parameters to explain the diverging ratio of redundancy fractions, while both capacities approach one. Connect the identical channels through three slots, the four-slot witness, the common resource model, and the two different converse mechanisms.
+**Understanding target.** Combine the capacity laws to obtain the diverging ratio of redundancy fractions. Explain why agreement through three slots and strict four-slot distinguishability can coexist with a growing carrier cost at fixed error. Contrast the product and unrestricted input thresholds, and explain what caps the advantage at intermediate entanglement depth.
 
-**Dependencies and story role.** M12, M22, M27–M29. This completes the narrative as one operational statement with its scientific boundaries.
+**Dependencies and story role.** M12, M22, M27–M29. This connects two operational questions on the same pair of channels.
 
-**Conceptual connection.** Short-channel equivalence does not determine optimal long-code redundancy. Separate inherited tools and the earlier Brownian entropy mechanism from the optimized fixed-qubit capacity consequence; distinguish analytical proof from finite diagnostics and scaling order from an exact coefficient or practical code.
+**Conceptual connection.** The capacity comparison asks what redundancy a known channel demands. The discrimination comparison asks how much evidence identifies the channel first. Depth constrains input entanglement among carriers, so the product-input comparison can still use joint readout.
 
-**Source pointers.** Preskill §10.7 for the capacity framework; [capacity separation, §3](../science/indistinguishability.md#3-consequence-for-asymptotic-quantum-communication), equations (C11)–(C12); [related work](../references/related-work.md); [verification and its limits](../verification/README.md#relationship-to-the-proofs).
+**Source pointers.** Preskill §10.7 for the capacity framework; [capacity separation, §3](../science/indistinguishability.md#3-consequence-for-asymptotic-quantum-communication), equations (C11)–(C12); [fixed-error resource law](../science/discrimination-and-depth.md#fixed-error-resource-law); [related work](../references/related-work.md); [verification and its limits](../verification/README.md#relationship-to-the-proofs).

@@ -1,8 +1,8 @@
 # Finite verification
 
-[check_phase_drift.py](check_phase_drift.py) checks finite instances of the channel identities, covariance decompositions, and entropy bounds used in the proofs. It also evaluates an integral whose value is derived analytically. The calculations are deterministic: they use complete enumeration of small bit-string and reset-pattern spaces, matrix diagonalization, and one-dimensional quadrature.
+[check_phase_drift.py](check_phase_drift.py) checks finite instances of the channel identities, covariance decompositions, entropy bounds, and discrimination formulas. The deterministic calculations enumerate small bit-string and reset-pattern spaces, diagonalize matrices, evaluate Gaussian moments, and perform one-dimensional quadrature.
 
-The recorded reference run passed **41 cases**. Full parameters, numerical outputs, tolerances, and software versions are in [expected-results.json](expected-results.json).
+The recorded reference run passed **68 cases**. Full parameters, numerical outputs, tolerances, and software versions are in [expected-results.json](expected-results.json).
 
 ## Reproduce the calculations
 
@@ -46,10 +46,14 @@ Here $n$ is the number of qubit carriers, $\kappa$ is the Brownian increment var
 | Gaussian entropy upper bound | 12 | $n=2,3,4,6$; $\kappa=0.01,0.1,0.5$. | The uniform-input complementary entropy, obtained from the normalized Gram matrix, is bounded by the binomial weight entropy plus the Gaussian covariance bound. |
 | Bridge moments and purity | 4 | $L=2,3,4,6$; $\kappa=1/(L^2-1)$. | Direct bit-string enumeration verifies the mean quadratic form, its second-moment bound, and the resulting purity gap. |
 | Four-slot witness | 1 | Four consecutive slots; $\kappa=0.2$. | The $\lvert0011\rangle\langle1100\rvert$ multipliers equal $e^{-3\kappa}$ and $e^{-3\kappa/2}$, respectively. |
+| Exact four-slot optimum | 4 | Consecutive and gapped slots at four noise strengths, with three choices of branch weights and passive reference per case. | The full channel difference has only the predicted conjugate pair of entries. Trace norms match the closed formula for balanced and unbalanced probes. |
+| Interleaved group phase moments | 5 | Between three and seven groups and up to 40 carriers. | Direct clock covariance and suffix charges give the same Gaussian phase covariance. Exact first and second count moments meet the bounds for balanced cats and product-state singlet readouts. |
+| Private-reference overlap | 3 | Fixed trajectories on three group partitions with entangled private references. | The overlap with a common rotation obeys the summed group-variance bound. |
+| Entanglement-depth schedule | 15 | Three noise strengths crossed with five depths, including depth one and depth beyond the saturation scale. | Rounding preserves the preparation depth, the phase-count scale, and the claimed carrier-count order. |
 | Entropy integral | 1 | Quadrature over $u\in(0,\infty)$. | The integral in the achievable coefficient agrees with $\pi^2/(4\ln2)$. |
 | Brownian covariance degradation | 4 | $(n,L,\kappa)=(2,2,0.03),(5,2,0.2),(6,3,0.5),(7,3,0.07)$. | Independent bridge and interpolation/tail covariances reconstruct the original covariance, and their channel composition reproduces the original Schur matrix. |
 | Reset-pattern enumeration and pinching | 4 | $(n,p)=(1,0.1),(2,0.05),(4,0.2),(5,0.6)$. | Explicit segment-twirl mixtures agree with the increment formula; coherent environment vectors have the correct Gram matrix; pinching the reset flag gives the stated entropy upper bound. |
-| **Total** | **41** | | |
+| **Total** | **68** | | |
 
 The largest selected-carrier Schur matrix is $128\times128$, at $n=7$. The reset checks enumerate $1,2,8,$ and $16$ reset patterns, respectively, for **27 patterns in total**. Their explicitly constructed environment dimensions are $2,7,82,$ and $280$.
 
@@ -68,10 +72,12 @@ These values summarize the full output in [expected-results.json](expected-resul
 | Largest Brownian channel-composition residual | $2.220446049250313\times10^{-16}$ |
 | Largest reset enumeration/Schur residual | $2.220446049250313\times10^{-16}$ |
 | Largest reset pinching entropy-formula residual | $8.881784197001252\times10^{-16}$ |
+| Largest four-slot trace-norm residual | $1.1102230246251565\times10^{-16}$ |
+| Largest group phase covariance residual | $1.1102230246251565\times10^{-16}$ |
 
 The algebra tolerance is $10^{-12}$, the entropy tolerance is $10^{-10}$, and the integral comparison tolerance is $10^{-6}$. Numerical positivity checks permit eigenvalues down to $-10^{-12}$, accommodating roundoff at singular matrices. A recorded zero is a floating-point result; the exact identity comes from its proof.
 
-For the specified four-carrier probe at $\kappa=0.2$, the Brownian and reset coherence multipliers are **0.5488116360940264** and **0.7408182206817179**. Its equal-prior single-trial discrimination success probability is **0.5480016461469228**. This is the performance of the stated probe and measurement, not an optimization over all four-carrier experiments.
+For the four-carrier probe at $\kappa=0.2$, the Brownian and reset coherence multipliers are **0.5488116360940264** and **0.7408182206817179**. Its equal-prior single-trial discrimination success probability is **0.5480016461469228**. The [four-slot proof](../science/discrimination-and-depth.md#exact-four-carrier-optimum) establishes that this probe achieves the optimum.
 
 Writing $g(z)=(z+1)\log_2(z+1)-z\log_2z$, the integral check evaluates
 
@@ -91,9 +97,10 @@ The authoritative mathematical arguments and operational assumptions are in:
 - [Brownian capacity](../science/brownian-capacity.md): the Gaussian entropy bound, analytical integral, bridge degradation, and converse covering arbitrary encoders.
 - [Reset capacity](../science/reset-capacity.md): coherent environment pinching, renewal boundary terms, and the finite-length Schmidt-number converse.
 - [Selected-slot indistinguishability](../science/indistinguishability.md): equality for arbitrary choices of at most three slots and the explicit four-slot diagnostic.
+- [Discrimination and entanglement depth](../science/discrimination-and-depth.md) proves the four-carrier optimum and gives matching fixed-error carrier bounds for each input depth.
 
 The finite calculations can expose indexing, normalization, covariance, or entropy-inequality mistakes in the checked cases. They do not establish the universal identities for all train lengths or gaps. In particular, these diagnostics do not numerically test every input distribution or substitute for either channel's coding converse.
 
 No quantum code is simulated, no capacity curve is fitted, and no optimal leading coefficient is inferred. The Gaussian bound can exceed the input entropy for a small block without invalidating the inequality; such a bound need not furnish a positive achievable rate at that block size. The coefficient obtained from the integral belongs to an achievable upper bound on the Brownian deficit, not a claimed exact capacity coefficient.
 
-The capacity theorems first take train length to infinity at each fixed positive noise parameter, then study the small-noise limit. These finite checks do not establish a uniform joint finite-length/small-noise theorem. They also make no claim about a stronger adaptive process interface, feedback assistance, or additional uncounted probes.
+The capacity theorems first take train length to infinity at fixed positive noise and then study the small-noise limit. The discrimination theorem instead fixes a target error and bounds the train length needed as the noise weakens. Its finite checks exercise the ingredients at selected parameter values. The universal depth law and the arbitrary-receiver lower bounds follow from the analytic proofs.

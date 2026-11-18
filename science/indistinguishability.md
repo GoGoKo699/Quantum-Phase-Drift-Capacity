@@ -117,7 +117,7 @@ The output trace distance and equal-prior single-trial success probability for t
  \qquad\text{(C10)}
 ```
 
-The measurement in (C9), assigning $`+`$ to reset and $`-`$ to Brownian, attains this success probability. This proves strict distinguishability for every $`\kappa>0`$. It does not assert that the displayed probe optimizes discrimination over all four-carrier inputs, or that the single-trial advantage remains constant as $`\kappa\downarrow0`$.
+The measurement in (C9), assigning $`+`$ to reset and $`-`$ to Brownian, attains this success probability. This proves strict distinguishability for every $`\kappa>0`$. The [exact four-carrier optimum](discrimination-and-depth.md#exact-four-carrier-optimum) shows this measurement and preparation attain the best success probability even with a passive reference. The advantage in (C10) vanishes as $`\kappa\downarrow0`$.
 
 For four arbitrary selected times, the same probe has
 $`\lambda_{\mathrm B}=\exp[-\kappa(g_2+4g_3+g_4)/2]`$
