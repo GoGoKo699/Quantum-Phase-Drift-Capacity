@@ -193,6 +193,203 @@ def check_block_factorization() -> list[dict[str, Any]]:
     return results
 
 
+def check_four_slot_optimum() -> list[dict[str, Any]]:
+    """Check the full four-slot channel difference and its reference-assisted witness."""
+    results = []
+    cases = (
+        (0.0, [1, 1, 1]),
+        (0.2, [1, 1, 1]),
+        (0.1, [3, 7, 2]),
+        (0.01, [1, 92, 1]),
+    )
+    for kappa, gaps in cases:
+        delta = math.exp(-0.5 * kappa * sum(gaps)) * -math.expm1(-1.5 * kappa * gaps[1])
+        expected = np.zeros((16, 16))
+        expected[3, 12] = expected[12, 3] = delta
+        difference = schur(4, kappa, "reset", gaps) - schur(4, kappa, "brownian", gaps)
+        kernel_residual = max_abs(difference - expected)
+        require(kernel_residual < ALGEBRA_TOL, "Unexpected four-slot Schur entry.")
+
+        # Use a common or an orthogonal private reference for the two branches.
+        residuals = []
+        for weight, reference_branch in ((0.5, 0), (0.5, 1), (0.2, 1)):
+            state = np.zeros((16, 2), dtype=complex)
+            state[3, 0] = math.sqrt(weight)
+            state[12, reference_branch] = 1j * math.sqrt(1.0 - weight)
+            output_difference = difference[:, None, :, None] * np.einsum(
+                "ir,js->irjs", state, state.conj()
+            )
+            eigenvalues = np.linalg.eigvalsh(output_difference.reshape(32, 32))
+            trace_norm = float(np.abs(eigenvalues).sum())
+            residual = abs(trace_norm - 2 * delta * math.sqrt(weight * (1.0 - weight)))
+            require(residual < ALGEBRA_TOL, "Four-slot trace-norm identity failed.")
+            residuals.append(residual)
+        results.append({
+            "kappa": kappa,
+            "gaps": gaps,
+            "kernel_residual": kernel_residual,
+            "reference_checks": len(residuals),
+            "trace_norm_residual": max(residuals),
+            "optimal_equal_prior_success": 0.5 + delta / 4,
+        })
+    return results
+
+
+def check_group_moments() -> list[dict[str, Any]]:
+    """Compare the phase covariance by two routes and evaluate count moments."""
+    results = []
+    cases = (
+        (1, 5, 0.04, 4),
+        (1, 7, 0.02, 2),
+        (2, 4, 0.02, 2),
+        (3, 3, 0.006, 2),
+        (5, 4, 0.001, 2),
+    )
+    for m, groups, kappa, divisor in cases:
+        half = m * groups
+        carriers = 2 * half
+        weights = np.zeros((groups, carriers), dtype=np.int64)
+        for group in range(groups):
+            early = slice(group * m, (group + 1) * m)
+            late = slice(half + early.start, half + early.stop)
+            weights[group, early] = 1
+            weights[group, late] = -1
+        require(
+            bool(np.all(weights.sum(axis=1) == 0)),
+            "Probe group is sensitive to common phase.",
+        )
+        steps = np.arange(carriers)
+        clock_cov = kappa * np.minimum.outer(steps, steps)
+        phase_cov = weights @ clock_cov @ weights.T
+        suffix = np.cumsum(weights[:, ::-1], axis=1)[:, -2::-1]
+        covariance_residual = max_abs(phase_cov - kappa * (suffix @ suffix.T))
+        require(covariance_residual < ALGEBRA_TOL, "Group phase covariance mismatch.")
+        variances = phase_cov.diagonal()
+        lower = kappa * m**2 * (half - m + 1)
+        upper = kappa * m**2 * half
+        require(
+            bool(np.all(variances >= lower - ALGEBRA_TOL))
+            and bool(np.all(variances <= upper + ALGEBRA_TOL)),
+            "Group phase variance lies outside its analytic bounds.",
+        )
+
+        # The readout indicators are independent given the trajectory.
+        # Their unconditional pair moments retain correlated phases.
+        cosine_mean = np.exp(-variances / 2)
+        means = (1.0 - cosine_mean) / divisor
+        cosine_products = np.outer(cosine_mean, cosine_mean) * np.cosh(phase_cov)
+        pair_moments = (
+            1.0 - cosine_mean[:, None] - cosine_mean[None, :] + cosine_products
+        ) / divisor**2
+        np.fill_diagonal(pair_moments, means)
+        first_moment = float(means.sum())
+        second_moment = float(pair_moments.sum())
+        gaussian_bound = first_moment + 3 * float(variances.sum())**2 / (4 * divisor**2)
+        require(
+            second_moment <= gaussian_bound + ALGEBRA_TOL,
+            "Count second-moment bound failed.",
+        )
+        require(second_moment >= first_moment**2, "Inconsistent count moments.")
+        results.append({
+            "probe": "product_singlets" if divisor == 4 else "balanced_cats",
+            "m": m,
+            "groups": groups,
+            "kappa": kappa,
+            "carrier_count": carriers,
+            "covariance_residual": covariance_residual,
+            "phase_variance": float(variances[0]),
+            "mean_count": first_moment,
+            "second_moment": second_moment,
+            "second_moment_upper_bound": gaussian_bound,
+            "paley_zygmund_detection_lower_bound": first_moment**2 / second_moment,
+        })
+    return results
+
+
+def check_private_reference_overlap() -> list[dict[str, Any]]:
+    """Exercise the deterministic group-overlap inequality with entangled private references."""
+    results = []
+    for group_sizes, phase_scale in (((1, 1, 1), 0.03), ((2, 2), 0.12), ((3, 1, 2), 0.3)):
+        states = []
+        rotated = []
+        group_losses = []
+        group_variances = []
+        phase_bound = 0.0
+        next_carrier = 0
+        for size in group_sizes:
+            occupations = bits(size)
+            phase = phase_scale * np.arange(next_carrier, next_carrier + size)
+            angles = occupations @ phase
+            amplitudes = np.column_stack(
+                (np.arange(1, 2**size + 1), 1j * (-1.0)**occupations.sum(axis=1))
+            )
+            amplitudes /= np.linalg.norm(amplitudes)
+            probabilities = (np.abs(amplitudes)**2).sum(axis=1)
+            variance = float(np.dot(probabilities, (angles - probabilities @ angles)**2))
+            shifted = amplitudes * np.exp(1j * angles[:, None])
+            loss = 1.0 - abs(np.vdot(amplitudes, shifted))**2
+            bound = size * float(phase @ phase) / 4
+            require(
+                loss <= variance + ALGEBRA_TOL and variance <= bound + ALGEBRA_TOL,
+                "Group overlap bound failed.",
+            )
+            states.append(amplitudes.ravel())
+            rotated.append(shifted.ravel())
+            group_losses.append(loss)
+            group_variances.append(variance)
+            phase_bound += bound
+            next_carrier += size
+        state = np.array([1.0])
+        shifted_state = np.array([1.0])
+        for block, shifted_block in zip(states, rotated, strict=True):
+            state = np.kron(state, block)
+            shifted_state = np.kron(shifted_state, shifted_block)
+        loss = 1.0 - abs(np.vdot(state, shifted_state))**2
+        require(
+            loss <= sum(group_losses) + ALGEBRA_TOL,
+            "Product overlap loss is not bounded by group losses.",
+        )
+        results.append({
+            "group_sizes": group_sizes,
+            "phase_scale": phase_scale,
+            "overlap_loss": loss,
+            "sum_group_variances": sum(group_variances),
+            "phase_quadratic_bound": phase_bound,
+        })
+    return results
+
+
+def check_depth_schedule() -> list[dict[str, Any]]:
+    """Check uniform rounding on both sides of the depth-saturation scale."""
+    results = []
+    for kappa in (1 / 64, 1e-4, 1e-8):
+        inverse_cube_root = (1 / kappa)**(1 / 3)
+        max_half = max(1, math.floor(inverse_cube_root / 2 + ALGEBRA_TOL))
+        for depth in (1, 2, 5, 31, 513):
+            m = 1 if depth == 1 else min(depth // 2, max_half)
+            groups = math.ceil((kappa * m**3)**-0.5)
+            carriers = 2 * m * groups
+            scale = max(inverse_cube_root, (kappa * depth)**-0.5)
+            phase_count_scale = kappa * m**3 * groups**2
+            require(depth == 1 or 2 * m <= depth, "Construction exceeds entanglement depth.")
+            require(groups >= 2, "Construction has no gap between groups.")
+            require(
+                1.0 - ALGEBRA_TOL <= phase_count_scale <= 2.0,
+                "Unexpected phase-count scaling.",
+            )
+            require(1.0 <= carriers / scale <= 8.0, "Unexpected carrier-count scaling.")
+            results.append({
+                "kappa": kappa,
+                "depth": depth,
+                "m": m,
+                "groups": groups,
+                "carrier_count": carriers,
+                "carrier_count_over_target_scale": carriers / scale,
+                "phase_count_scale": phase_count_scale,
+            })
+    return results
+
+
 def check_gaussian_entropy_bounds() -> list[dict[str, Any]]:
     results = []
     for n in (2, 3, 4, 6):
@@ -476,8 +673,8 @@ def check_integral() -> dict[str, float]:
 def run_checks() -> dict[str, Any]:
     results: dict[str, Any] = {
         "scope": (
-            "Finite algebra, covariance, and entropy diagnostics; "
-            "no numerical inference of asymptotic capacity."
+            "Finite algebra, covariance, entropy, and discrimination diagnostics; "
+            "analytic results remain in the scientific account."
         ),
         "versions": {
             "python": platform.python_version(),
@@ -491,6 +688,10 @@ def run_checks() -> dict[str, Any]:
         },
         "up_to_three_slots": check_selected_slots(),
         "four_slot_witness": check_four_slot_witness(),
+        "four_slot_optimum": check_four_slot_optimum(),
+        "group_phase_moments": check_group_moments(),
+        "private_reference_overlap": check_private_reference_overlap(),
+        "depth_schedule": check_depth_schedule(),
         "independent_block_twirling": check_block_factorization(),
         "entropy_bounds": check_gaussian_entropy_bounds(),
         "bridge_moments": check_bridge_moments(),
@@ -502,6 +703,7 @@ def run_checks() -> dict[str, Any]:
             "Entropy upper bounds and conservative converse constants are not optimal capacities.",
             "Quadrature checks an analytically derived integral; it is not an asymptotic proof.",
             "No coding simulation, capacity fit, or uniform finite-length/small-noise claim is made.",
+            "Finite discrimination checks do not optimize arbitrary inputs or fit the depth exponents.",
         ],
     }
     counts = {
@@ -510,6 +712,10 @@ def run_checks() -> dict[str, Any]:
         "gaussian_entropy_bounds": len(results["entropy_bounds"]),
         "bridge_moments": len(results["bridge_moments"]),
         "four_slot_witnesses": 1,
+        "four_slot_optima": len(results["four_slot_optimum"]),
+        "group_phase_moments": len(results["group_phase_moments"]),
+        "private_reference_overlaps": len(results["private_reference_overlap"]),
+        "depth_schedules": len(results["depth_schedule"]),
         "asymptotic_integrals": 1,
         "brownian_covariance_degradations": len(results["brownian_covariance_degradation"]),
         "reset_pattern_enumerations": len(results["reset_pattern_enumeration"]),
@@ -554,6 +760,12 @@ def main(argv: list[str] | None = None) -> int:
     summary["maximum_reset_pinching_formula_error"] = max(
         case["pinched_entropy_formula_difference"]
         for case in results["reset_pattern_enumeration"]
+    )
+    summary["maximum_four_slot_trace_norm_error"] = max(
+        case["trace_norm_residual"] for case in results["four_slot_optimum"]
+    )
+    summary["maximum_group_phase_covariance_error"] = max(
+        case["covariance_residual"] for case in results["group_phase_moments"]
     )
     print(json.dumps(summary, indent=2, allow_nan=False))
     return 0

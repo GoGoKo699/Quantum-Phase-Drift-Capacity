@@ -112,8 +112,20 @@ S. D. Bartlett, T. Rudolph, and R. W. Spekkens, **Reference frames, superselecti
 
 This review explains phase twirling, charge sectors and communication without a shared reference frame. Those concepts are background for the present temporal noise problem. All finite-sector identities needed by the reset proof are derived in the repository.
 
+## Discriminating the noise process
+
+The [fixed-error resource law](../science/discrimination-and-depth.md) uses binary channel discrimination and Gaussian phase moments. It asks how many one-pass qubit carriers are needed when the two processes agree exactly on all three-carrier channels, and how the answer depends on input entanglement depth.
+
+- **Noise spectroscopy.** L. M. Norris, G. A. Paz-Silva and L. Viola, *Qubit Noise Spectroscopy for Non-Gaussian Dephasing Environments*, [Phys. Rev. Lett. 116, 150503 (2016)](https://doi.org/10.1103/PhysRevLett.116.150503). Their frequency-comb procedure reconstructs higher-order spectra using repeated controls on a probe. Here the carriers make one pass at prescribed slots and the endpoint is a fixed-error decision.
+- **Dephasing channel discrimination.** M. Rexiti, L. Memarzadeh and S. Mancini, *Discrimination of dephasing channels*, [J. Phys. A 55, 245301 (2022)](https://doi.org/10.1088/1751-8121/ac6d2c), [arXiv:2201.00388](https://arxiv.org/abs/2201.00388). Their low-dimensional optimization includes the role of a passive ancilla. The entanglement resource here is across the transmitted slots in a growing train. The four-slot problem reduces to a single pair of Schur entries, giving a separate exact upper bound even with a passive reference.
+- **Bosonic dephasing discrimination.** Z. Huang, L. Lami and M. M. Wilde, *Exact Quantum Sensing Limits for Bosonic Dephasing Channels*, [PRX Quantum 5, 020354 (2024)](https://doi.org/10.1103/PRXQuantum.5.020354), Section VI. Their environment-seizing limit recovers phase draws by increasing bosonic energy or support. In the fixed-qubit train, a single slot has only two levels and its output alone has no information about these matched laws.
+- **Estimation under correlated noise.** S. Ghosh, A. Kobus, S. Kurdziałek and R. Demkowicz-Dobrzański, *Optimal phase estimation in the presence of correlated dephasing*, [Quantum 10, 2251 (2026)](https://doi.org/10.22331/q-2026-10-28-2251). Their task estimates a mean phase under a specified correlated dephasing law. The present discriminator selects between two known stochastic laws with identical low-slot channels.
+
+The exact single-pair trace-norm calculation uses the standard binary state discrimination formula. The fixed-error scaling follows from the common-phase channel comparison and the explicit timed probe groups. These distinctions are a targeted comparison of models and results.
+
 ## Educational anchor
 
 John Preskill, **Quantum Information, Chapter 10: Quantum Shannon Theory**, updated June 2025. [Official author-hosted PDF](https://www.preskill.caltech.edu/ph219/chap10_6A_2025.pdf).
 
 This is the single anchor for the [learning route](../learning/README.md). Its entropy and quantum-capacity framework is connected to the project's exact blocking, Gaussian entropy, bridge and renewal arguments in the [source-to-project bridge](../learning/anchor-and-bridge.md). The research citations above retain their roles in attribution and proof dependencies.
+

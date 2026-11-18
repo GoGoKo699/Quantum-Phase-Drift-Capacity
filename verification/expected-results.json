@@ -1,5 +1,5 @@
 {
-  "scope": "Finite algebra, covariance, and entropy diagnostics; no numerical inference of asymptotic capacity.",
+  "scope": "Finite algebra, covariance, entropy, and discrimination diagnostics; analytic results remain in the scientific account.",
   "versions": {
     "python": "3.12.14",
     "numpy": "2.3.5",
@@ -87,6 +87,294 @@
     "reset": 0.7408182206817179,
     "specified_probe_success_probability": 0.5480016461469228
   },
+  "four_slot_optimum": [
+    {
+      "kappa": 0.0,
+      "gaps": [
+        1,
+        1,
+        1
+      ],
+      "kernel_residual": 0.0,
+      "reference_checks": 3,
+      "trace_norm_residual": 0.0,
+      "optimal_equal_prior_success": 0.5
+    },
+    {
+      "kappa": 0.2,
+      "gaps": [
+        1,
+        1,
+        1
+      ],
+      "kernel_residual": 2.7755575615628914e-17,
+      "reference_checks": 3,
+      "trace_norm_residual": 8.326672684688674e-17,
+      "optimal_equal_prior_success": 0.5480016461469228
+    },
+    {
+      "kappa": 0.1,
+      "gaps": [
+        3,
+        7,
+        2
+      ],
+      "kernel_residual": 5.551115123125783e-17,
+      "reference_checks": 3,
+      "trace_norm_residual": 5.551115123125783e-17,
+      "optimal_equal_prior_success": 0.5891904318683181
+    },
+    {
+      "kappa": 0.01,
+      "gaps": [
+        1,
+        92,
+        1
+      ],
+      "kernel_residual": 0.0,
+      "reference_checks": 3,
+      "trace_norm_residual": 1.1102230246251565e-16,
+      "optimal_equal_prior_success": 0.6169412754922683
+    }
+  ],
+  "group_phase_moments": [
+    {
+      "probe": "product_singlets",
+      "m": 1,
+      "groups": 5,
+      "kappa": 0.04,
+      "carrier_count": 10,
+      "covariance_residual": 2.7755575615628914e-17,
+      "phase_variance": 0.2,
+      "mean_count": 0.1189532274550506,
+      "second_moment": 0.13847463346845962,
+      "second_moment_upper_bound": 0.1658282274550506,
+      "paley_zygmund_detection_lower_bound": 0.10218384383877731
+    },
+    {
+      "probe": "balanced_cats",
+      "m": 1,
+      "groups": 7,
+      "kappa": 0.02,
+      "carrier_count": 14,
+      "covariance_residual": 2.7755575615628914e-17,
+      "phase_variance": 0.14,
+      "mean_count": 0.23662163032918132,
+      "second_moment": 0.322986953532995,
+      "second_moment_upper_bound": 0.41669663032918136,
+      "paley_zygmund_detection_lower_bound": 0.17335002335913255
+    },
+    {
+      "probe": "balanced_cats",
+      "m": 2,
+      "groups": 4,
+      "kappa": 0.02,
+      "carrier_count": 16,
+      "covariance_residual": 1.1102230246251565e-16,
+      "phase_variance": 0.6000000000000001,
+      "mean_count": 0.5183635586365642,
+      "second_moment": 0.8484183096112123,
+      "second_moment_upper_bound": 1.5983635586365645,
+      "paley_zygmund_detection_lower_bound": 0.316707897364326
+    },
+    {
+      "probe": "balanced_cats",
+      "m": 3,
+      "groups": 3,
+      "kappa": 0.006,
+      "carrier_count": 18,
+      "covariance_residual": 5.551115123125783e-17,
+      "phase_variance": 0.438,
+      "mean_count": 0.2950174227695602,
+      "second_moment": 0.39145340239645177,
+      "second_moment_upper_bound": 0.6187541727695602,
+      "paley_zygmund_detection_lower_bound": 0.22233879998173273
+    },
+    {
+      "probe": "balanced_cats",
+      "m": 5,
+      "groups": 4,
+      "kappa": 0.001,
+      "carrier_count": 40,
+      "covariance_residual": 5.551115123125783e-17,
+      "phase_variance": 0.4600000000000001,
+      "mean_count": 0.41093279499333196,
+      "second_moment": 0.6272464631059237,
+      "second_moment_upper_bound": 1.045732794993332,
+      "paley_zygmund_detection_lower_bound": 0.2692175594978449
+    }
+  ],
+  "private_reference_overlap": [
+    {
+      "group_sizes": [
+        1,
+        1,
+        1
+      ],
+      "phase_scale": 0.03,
+      "overlap_loss": 0.0009179982969489409,
+      "sum_group_variances": 0.0009183673469387752,
+      "phase_quadratic_bound": 0.001125
+    },
+    {
+      "group_sizes": [
+        2,
+        2
+      ],
+      "phase_scale": 0.12,
+      "overlap_loss": 0.03923233473804666,
+      "sum_group_variances": 0.039911418685121096,
+      "phase_quadratic_bound": 0.10079999999999999
+    },
+    {
+      "group_sizes": [
+        3,
+        1,
+        2
+      ],
+      "phase_scale": 0.3,
+      "overlap_loss": 0.6360514359851832,
+      "sum_group_variances": 0.9702677971697546,
+      "phase_quadratic_bound": 2.385
+    }
+  ],
+  "depth_schedule": [
+    {
+      "kappa": 0.015625,
+      "depth": 1,
+      "m": 1,
+      "groups": 8,
+      "carrier_count": 16,
+      "carrier_count_over_target_scale": 2.0,
+      "phase_count_scale": 1.0
+    },
+    {
+      "kappa": 0.015625,
+      "depth": 2,
+      "m": 1,
+      "groups": 8,
+      "carrier_count": 16,
+      "carrier_count_over_target_scale": 2.82842712474619,
+      "phase_count_scale": 1.0
+    },
+    {
+      "kappa": 0.015625,
+      "depth": 5,
+      "m": 2,
+      "groups": 3,
+      "carrier_count": 12,
+      "carrier_count_over_target_scale": 3.0000000000000004,
+      "phase_count_scale": 1.125
+    },
+    {
+      "kappa": 0.015625,
+      "depth": 31,
+      "m": 2,
+      "groups": 3,
+      "carrier_count": 12,
+      "carrier_count_over_target_scale": 3.0000000000000004,
+      "phase_count_scale": 1.125
+    },
+    {
+      "kappa": 0.015625,
+      "depth": 513,
+      "m": 2,
+      "groups": 3,
+      "carrier_count": 12,
+      "carrier_count_over_target_scale": 3.0000000000000004,
+      "phase_count_scale": 1.125
+    },
+    {
+      "kappa": 0.0001,
+      "depth": 1,
+      "m": 1,
+      "groups": 100,
+      "carrier_count": 200,
+      "carrier_count_over_target_scale": 2.0,
+      "phase_count_scale": 1.0
+    },
+    {
+      "kappa": 0.0001,
+      "depth": 2,
+      "m": 1,
+      "groups": 100,
+      "carrier_count": 200,
+      "carrier_count_over_target_scale": 2.82842712474619,
+      "phase_count_scale": 1.0
+    },
+    {
+      "kappa": 0.0001,
+      "depth": 5,
+      "m": 2,
+      "groups": 36,
+      "carrier_count": 144,
+      "carrier_count_over_target_scale": 3.219937887599697,
+      "phase_count_scale": 1.0368
+    },
+    {
+      "kappa": 0.0001,
+      "depth": 31,
+      "m": 10,
+      "groups": 4,
+      "carrier_count": 80,
+      "carrier_count_over_target_scale": 3.7132710668902242,
+      "phase_count_scale": 1.6
+    },
+    {
+      "kappa": 0.0001,
+      "depth": 513,
+      "m": 10,
+      "groups": 4,
+      "carrier_count": 80,
+      "carrier_count_over_target_scale": 3.7132710668902242,
+      "phase_count_scale": 1.6
+    },
+    {
+      "kappa": 1e-08,
+      "depth": 1,
+      "m": 1,
+      "groups": 10000,
+      "carrier_count": 20000,
+      "carrier_count_over_target_scale": 2.0,
+      "phase_count_scale": 1.0
+    },
+    {
+      "kappa": 1e-08,
+      "depth": 2,
+      "m": 1,
+      "groups": 10000,
+      "carrier_count": 20000,
+      "carrier_count_over_target_scale": 2.8284271247461903,
+      "phase_count_scale": 1.0
+    },
+    {
+      "kappa": 1e-08,
+      "depth": 5,
+      "m": 2,
+      "groups": 3536,
+      "carrier_count": 14144,
+      "carrier_count_over_target_scale": 3.162694547375702,
+      "phase_count_scale": 1.00026368
+    },
+    {
+      "kappa": 1e-08,
+      "depth": 31,
+      "m": 15,
+      "groups": 173,
+      "carrier_count": 5190,
+      "carrier_count_over_target_scale": 2.8896697043087816,
+      "phase_count_scale": 1.01010375
+    },
+    {
+      "kappa": 1e-08,
+      "depth": 513,
+      "m": 232,
+      "groups": 3,
+      "carrier_count": 1392,
+      "carrier_count_over_target_scale": 2.9989730885243833,
+      "phase_count_scale": 1.12384512
+    }
+  ],
   "independent_block_twirling": [
     {
       "kind": "brownian",
@@ -364,7 +652,8 @@
     "Finite selected cases do not prove the universal channel identities.",
     "Entropy upper bounds and conservative converse constants are not optimal capacities.",
     "Quadrature checks an analytically derived integral; it is not an asymptotic proof.",
-    "No coding simulation, capacity fit, or uniform finite-length/small-noise claim is made."
+    "No coding simulation, capacity fit, or uniform finite-length/small-noise claim is made.",
+    "Finite discrimination checks do not optimize arbitrary inputs or fit the depth exponents."
   ],
   "case_counts": {
     "selected_slot_kernels": 9,
@@ -372,10 +661,14 @@
     "gaussian_entropy_bounds": 12,
     "bridge_moments": 4,
     "four_slot_witnesses": 1,
+    "four_slot_optima": 4,
+    "group_phase_moments": 5,
+    "private_reference_overlaps": 3,
+    "depth_schedules": 15,
     "asymptotic_integrals": 1,
     "brownian_covariance_degradations": 4,
     "reset_pattern_enumerations": 4,
-    "total": 41
+    "total": 68
   },
   "status": "passed"
 }
