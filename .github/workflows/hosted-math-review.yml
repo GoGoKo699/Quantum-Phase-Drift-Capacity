@@ -9,7 +9,7 @@ permissions:
   contents: read
 
 concurrency:
-  group: phase-drift-depth-hosted-review
+  group: phase-drift-depth-hosted-review-preinstalled
   cancel-in-progress: false
 
 jobs:
@@ -32,7 +32,7 @@ jobs:
         shell: bash
         run: |
           npm install --prefix "$RUNNER_TEMP/phase-drift-deps" playwright@1.56.1 mathjax-full@3.2.1
-          PLAYWRIGHT_BROWSERS_PATH="$RUNNER_TEMP/phase-drift-browsers" "$RUNNER_TEMP/phase-drift-deps/node_modules/.bin/playwright" install --with-deps chromium --only-shell
+          PLAYWRIGHT_BROWSERS_PATH="$RUNNER_TEMP/phase-drift-browsers" "$RUNNER_TEMP/phase-drift-deps/node_modules/.bin/playwright" install chromium --only-shell
       - name: Compare every hosted expression at both viewport widths
         shell: bash
         run: |
