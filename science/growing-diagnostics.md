@@ -202,6 +202,10 @@ where $`a_0=0`$ and $`a_s\le s`$. The [finite-code converse](brownian-capacity.m
 
 Theorems G1 and G2 describe two different accuracy criteria. Selected-carrier channel data determine capacity to a uniform additive tolerance that vanishes with block size. A small interval in absolute capacity can still include deficits that differ by a large factor near capacity one. The tight number of carriers needed to resolve the deficit across the full increment-law class remains open.
 
+## Application to timestamped entanglement
+
+At $r=1$, the grid contains only the angles zero and $\pi$. This gives a Brownian law and a law with weak Brownian smoothing and rare $\pi$ jumps. [Timestamped entanglement](timestamped-entanglement.md) applies the same harmonic match to raw entangled links sampled at Poisson times and gives the resulting distillation-rate separation.
+
 ## Prior results used here
 
 The matched low-carrier mechanism starts from the existing [three-slot comparison](indistinguishability.md). The jump construction uses a standard Fourier differentiation formula, and the capacity proof uses the existing Brownian theorem, exact charge twirl and standard generalized-dephasing additivity. Channel estimation from pooled measurements of a train, including [Pfister et al.](https://arxiv.org/abs/1611.05411), can access joint statistics beyond the selected-carrier marginals considered here. The [related-work discussion](../references/related-work.md) gives the scope of prior capacity and spectroscopy results.

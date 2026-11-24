@@ -11,7 +11,7 @@ The [shared map contains exactly 30 milestones](milestones.md). Its allocation f
 | Phase | Milestones | Progression |
 |---|---|---|
 | Background and preliminaries | M01–M12 | A qubit coherence and an unknown phase lead to charge sectors, channels, entropy, coherent information, and the common coding problem. |
-| Narrative and innovation | M13–M30 | Exact blocking leads to the Brownian and reset bounds, the first distinguishing tests, a growing family of matched diagnostics, and an absolute finite-block capacity certificate. |
+| Narrative and innovation | M13–M30 | Exact blocking leads to the Brownian and reset bounds, the first distinguishing tests, a growing family of matched diagnostics, an absolute finite-block capacity certificate, and an application to timestamped distillation. |
 
 Each milestone states a central question, an understanding target, dependencies, a conceptual connection and source pointers. The final target in each phase connects the preceding ideas. The map is a route to understanding the contribution; detailed derivations retain their authoritative homes in the scientific pages.
 
@@ -20,6 +20,8 @@ Each milestone states a central question, an understanding target, dependencies,
 Read the [bridge](anchor-and-bridge.md) for the physical setting and a small worked example, then follow the [milestone map](milestones.md). The selected Preskill sections can be read alongside the relevant milestones; the full chapter is not a prerequisite assignment.
 
 For a direct specialist route, use the [scientific overview](../science/README.md), followed by [the model and exact blocking](../science/model-and-blocking.md), [Brownian capacity](../science/brownian-capacity.md), [reset capacity](../science/reset-capacity.md), [the selected-slot comparison](../science/indistinguishability.md), [the discrimination and depth result](../science/discrimination-and-depth.md), and [the growing diagnostic and capacity certificate](../science/growing-diagnostics.md). The [reference account](../references/related-work.md) identifies inherited tools and the project's contribution. The [verification guide](../verification/README.md) connects finite calculations to the analytical proofs.
+
+The [timestamped example](../science/timestamped-entanglement.md) uses the same finite channel identity to compare the distillation losses of clean herald streams at a fixed Poisson intensity.
 
 ## Keep the operational question in view
 

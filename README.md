@@ -18,6 +18,10 @@ Absolute capacity can still be bounded from a complete $`n`$-carrier block chann
 
 The interval width vanishes with $`n`$. The optimal window size for estimating the much smaller redundancy $`1-Q`$ to relative accuracy remains open.
 
+## Timestamped entanglement
+
+The two smooth laws at $`r=1`$ give identical raw entangled states through three offered heralds. Four suffice to distinguish the laws by local measurements. At fixed Poisson herald intensity the Brownian distillation loss is of square-root order, while the loss from rare $`\pi`$ jumps scales as the jump rate times its logarithmic inverse. See [the matched-phase connection](science/timestamped-entanglement.md) and the [distillation theorem in Quantum Timestamped Entanglement](https://github.com/GoGoKo699/Quantum-Timestamped-Entanglement/blob/main/science/matched-phase-diagnostics.md).
+
 ## Quantum communication capacity
 
 One qubit is transmitted in each equally spaced slot. The initial phase is uniform, the phase trajectory is inaccessible, and the encoder and decoder may act collectively on the whole train. Every carrier is counted. Let $Q$ denote unassisted quantum capacity in logical qubits per transmitted qubit.
@@ -62,6 +66,7 @@ Start with the [scientific overview](science/README.md), or go directly to the q
 | What changes when the phase is held constant between random resets? | [Reset capacity](science/reset-capacity.md) |
 | Why do all channels through three slots agree? | [Indistinguishability and capacity separation](science/indistinguishability.md) |
 | Can exact agreement persist for a growing number of carriers, and what does a finite block certify? | [Growing diagnostic window](science/growing-diagnostics.md) |
+| How does the matched phase pair affect a Poisson stream of heralded links? | [Timestamped entanglement](science/timestamped-entanglement.md) |
 | How many carriers and how much input entanglement give a fixed error? | [Discrimination and entanglement depth](science/discrimination-and-depth.md) |
 | Which ingredients are inherited, and what is the specific addition? | [Related work and references](references/related-work.md) |
 | How can the finite algebraic and entropy checks be reproduced? | [Verification](verification/README.md) |
@@ -72,7 +77,7 @@ The [LLM reading guide](llms.txt) maps further questions to these same sources.
 
 The [learning route](learning/README.md) uses **Preskill's _Quantum Shannon Theory_, updated June 2025**, as its single educational anchor. The [source-to-project bridge](learning/anchor-and-bridge.md) connects entropy and channel capacity to the phase-noise model through a worked example and a notation guide.
 
-The [30-milestone map](learning/milestones.md) develops 12 background targets and 18 targets through the project's arguments. The final milestones connect the Brownian/reset comparison to the growing-window construction and the finite-block capacity interval.
+The [30-milestone map](learning/milestones.md) develops 12 background targets and 18 targets through the project's arguments. The final milestones connect the Brownian/reset comparison to the growing-window construction, the finite-block capacity interval and the timestamped distillation example.
 
 ## How the bounds work
 

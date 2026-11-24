@@ -180,6 +180,12 @@ Let $\mathcal N_n$ be the consecutive $n$-carrier channel and $J(\mathcal N_n)$ 
 
 The resulting interval certifies an absolute error of at most $\log_2(n+1)/n$ in logical qubits per carrier. The deficit $1-Q$ can be much smaller than that error. Identical small-block channels yield identical certificates at that block size, even when their deficits are far apart in relative terms. [Finite-block capacity certificate](../science/growing-diagnostics.md#5-an-absolute-capacity-certificate-from-a-finite-channel)
 
+### From carrier channels to timestamped links
+
+For the smooth pair at $r=1$, replace the chosen qubit input with the clean entangled source. After a local bit flip, the raw state is the Choi state of the same selected-carrier phase channel. The first harmonic determines every state through three heralds. The same two strings that identify charge two on four carrier slots now give a test by local projection and a comparison of logical measurement outcomes. [Matched phase laws for timestamped entanglement](../science/timestamped-entanglement.md)
+
+In the communication problem, the sender chooses the input and capacity counts logical qubits per transmitted qubit. In the Poisson source problem, the raw states are supplied and the parties distill ebits per unit time. For clean raw links the block has a uniform local marginal, so its hashing yield is the click count minus the joint entropy. Brownian bridges and rare jump parities give different entropy losses per unit time, even though the small timestamped blocks agree. [Poisson distillation proof](https://github.com/GoGoKo699/Quantum-Timestamped-Entanglement/blob/main/science/matched-phase-diagnostics.md)
+
 ## 8. A connected reading path
 
 Use the [milestone map](milestones.md) to connect the local objects of phase rotations, charge sectors, entropy, and channel complements to the full result. The narrative then passes through exact blocking, the two Brownian bounds, reset segments, and the channel comparison. The [science overview](../science/README.md) gives a shorter route directly to the authoritative arguments.
