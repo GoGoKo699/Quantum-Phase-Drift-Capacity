@@ -13,6 +13,8 @@ The project studies the quantum communication redundancy and diagnostic cost of 
 
 Use the authoritative topic pages for exact claims. The learning bridge explains their connections without replacing the full proofs.
 
+- Timestamped distillation: science/timestamped-entanglement.md specializes the smooth match to r=1 and identifies the link-state correspondence, the four-herald test, and the clean Poisson distillation-rate separation.
+
 ## Preserve the scientific distinctions
 
 Every physical carrier counts, including pilots and padding. Capacity takes the train-length limit at fixed cadence and fixed noise before the small-noise limit. The phase trajectory is hidden. A passive reference is allowed for the selected-carrier channel comparisons. The fixed-error discrimination law concerns the specified Brownian and uniform-reset pair with known matched parameters. Depth constrains preparation groups and their private references, and joint receiver measurements are allowed. The growing-window witness gives a first distinct subchannel and does not establish the repetition cost of distinguishing the new pair. The absolute capacity interval uses a finite optimization whose efficiency is unspecified. Exact leading capacity coefficients and the optimal carrier threshold for relative redundancy estimation remain open.

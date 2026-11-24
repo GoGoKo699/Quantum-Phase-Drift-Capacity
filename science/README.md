@@ -10,6 +10,7 @@ Every single-carrier marginal in this model is completely dephasing. Temporal co
 4. [Indistinguishability and separation](indistinguishability.md) matches the two parameters, proves equality of every channel through three selected slots, and gives a physical four-carrier diagnostic. It combines the two capacity results to obtain an unbounded ratio of redundancy fractions.
 5. [Discrimination and entanglement depth](discrimination-and-depth.md) proves optimality on any four fixed slots and determines the consecutive train length needed at fixed error. The lower bounds cover joint readout, and the constructions attain them at each input entanglement depth.
 6. [Growing diagnostic window](growing-diagnostics.md) constructs two smooth phase processes with exactly matched channels through $2r+1$ carriers, a first difference at $2r+2$, and parametrically different capacity deficits. It also bounds the absolute capacity using the optimized coherent information of any finite block in the independent-increment model.
+7. [Timestamped entanglement](timestamped-entanglement.md) identifies the finite-source diagnostic and the long-stream distillation consequence for the smooth pair at $r=1$.
 
 The [related-work account](../references/related-work.md) separates standard tools and model ancestors from this specific consequence. [Reproduction checks](../verification/README.md) provide finite diagnostics of the load-bearing identities.
 
