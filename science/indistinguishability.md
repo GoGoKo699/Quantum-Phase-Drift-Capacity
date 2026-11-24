@@ -1,5 +1,7 @@
 # Few-carrier indistinguishability and capacity separation
 
+For a different pair of smooth phase processes, the [growing-window theorem](growing-diagnostics.md) gives exact agreement through any prescribed $`2r+1`$ selected carriers and the first difference at $`2r+2`$. The Brownian and uniform-reset pair treated here remains the simplest example and has its own fixed-error discrimination result.
+
 Two stationary phase processes agree on every selected-carrier channel through three slots but require asymptotically different redundancy fractions. The common [operational model](model-and-blocking.md), [Brownian capacity theorem](brownian-capacity.md), and [reset capacity theorem](reset-capacity.md) fix the resources and rate convention used here. For the reset process, $`f_{\mathrm R}(0)=1`$ and $`f_{\mathrm R}(q)=1-p`$ for every nonzero integer $`q`$.
 
 ## 1. Exact equality for any choice of at most three slots

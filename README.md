@@ -1,8 +1,22 @@
 # Quantum Phase Drift Capacity
 
-How much redundancy does a drifting phase impose on quantum communication, and how many carriers does it take to tell drift from random resets?
+How much redundancy does a drifting phase impose on quantum communication, and what can a measurement on a limited number of carriers tell us about that cost?
 
-This repository studies a train of qubits subject to a stationary, unknown phase process. Brownian phase drift and random phase resets have identical channels on every selection of at most three carrier slots. They produce different capacity losses, and the number of carriers needed to distinguish them depends on how many can be entangled in the input.
+This repository studies a train of qubits subject to a stationary, unknown phase process. Brownian drift and random resets give a simple example of identical few-carrier channels with different long-train capacity losses. The same phenomenon persists when the number of carriers available for diagnosis grows as the noise weakens.
+
+## What can a finite set of carriers reveal?
+
+For each positive integer $`r`$, the [growing diagnostic window](science/growing-diagnostics.md) constructs two smooth, mixing phase processes with identical quantum channels on every selection of at most $`2r+1`$ carriers. Equality holds at arbitrary time gaps and with a passive reference. The first unequal channel occurs at $`2r+2`$ carriers, where a balanced two-string input detects the next Fourier harmonic.
+
+At a fixed unit cadence, write $`Q_A`$ and $`Q_B`$ for their unassisted capacities and $`\kappa`$ for the difference between their Brownian variance parameters. The redundancy ratio $`(1-Q_A)/(1-Q_B)`$ diverges even for a growing $`r=o(\kappa^{-1/4}/\sqrt{\log(1/\kappa)})`$. In this regime, $`1-Q_A`$ has order $`\sqrt{\kappa}`$, whereas $`1-Q_B`$ is at most of order $`\kappa^2+\kappa r^2\log(e/(\kappa r^2))`$.
+
+Absolute capacity can still be bounded from a complete $`n`$-carrier block channel. If $`a_n`$ is its optimized coherent information, every stationary independent-increment process in this model satisfies
+
+```math
+\frac{a_n}{n}\le Q\le\frac{a_n+\log_2(n+1)}{n}.
+```
+
+The interval width vanishes with $`n`$. The optimal window size for estimating the much smaller redundancy $`1-Q`$ to relative accuracy remains open.
 
 ## Quantum communication capacity
 
@@ -24,7 +38,7 @@ Choose $p=1-e^{-\kappa/2}$. The two models then have the same first-harmonic cor
 
 These capacity laws take the train-length limit at fixed noise before the small-noise limit. They determine the orders of the optimal deficits.
 
-## How many carriers distinguish the processes?
+## How many carriers distinguish Brownian drift from uniform resets?
 
 The [four-carrier test](science/indistinguishability.md#2-four-carriers-provide-an-explicit-diagnostic) measures the coherence between $0011$ and $1100$. For four consecutive carriers, it decays by $e^{-3\kappa}$ under Brownian drift and by $e^{-3\kappa/2}$ under resets. The same two-string probe is [optimal on any four fixed selected slots](science/discrimination-and-depth.md#exact-four-carrier-optimum), including when the receiver has a passive reference. Its success probability tends to one half as the noise weakens on four consecutive slots.
 
@@ -47,6 +61,7 @@ Start with the [scientific overview](science/README.md), or go directly to the q
 | Why is the Brownian deficit of square-root order for every code? | [Brownian capacity](science/brownian-capacity.md) |
 | What changes when the phase is held constant between random resets? | [Reset capacity](science/reset-capacity.md) |
 | Why do all channels through three slots agree? | [Indistinguishability and capacity separation](science/indistinguishability.md) |
+| Can exact agreement persist for a growing number of carriers, and what does a finite block certify? | [Growing diagnostic window](science/growing-diagnostics.md) |
 | How many carriers and how much input entanglement give a fixed error? | [Discrimination and entanglement depth](science/discrimination-and-depth.md) |
 | Which ingredients are inherited, and what is the specific addition? | [Related work and references](references/related-work.md) |
 | How can the finite algebraic and entropy checks be reproduced? | [Verification](verification/README.md) |
@@ -57,7 +72,7 @@ The [LLM reading guide](llms.txt) maps further questions to these same sources.
 
 The [learning route](learning/README.md) uses **Preskill's _Quantum Shannon Theory_, updated June 2025**, as its single educational anchor. The [source-to-project bridge](learning/anchor-and-bridge.md) connects entropy and channel capacity to the phase-noise model through a worked example and a notation guide.
 
-The [30-milestone map](learning/milestones.md) develops 12 background targets and 18 targets through the project's arguments. Each milestone identifies its central question, dependencies, conceptual connection and scientific sources. The route ends by connecting the two capacity laws, the optimal four-carrier test and the fixed-error tradeoff.
+The [30-milestone map](learning/milestones.md) develops 12 background targets and 18 targets through the project's arguments. The final milestones connect the Brownian/reset comparison to the growing-window construction and the finite-block capacity interval.
 
 ## How the bounds work
 
@@ -73,7 +88,7 @@ For discrimination, the common-phase channel bounds both hypotheses when the tra
 
 The physical model has phase noise only, one two-dimensional carrier per fixed slot, arbitrary local encoding and decoding operations, and no preshared entanglement, feedback, free shared phase reference or extra communication channel. The oscillator dilation is a proof device. Endpoint phases and reset locations are converse aids and are not supplied to the actual coding protocol.
 
-Square-root entropy flow under Brownian phase diffusion already appears in Wiseman's laser-beam analysis. Generalized-dephasing capacity tools, collective-charge encoding and Gaussian entropy extremality are established ingredients. The contribution is the optimized fixed-qubit capacity comparison and the sharp carrier and input-depth requirements for distinguishing the matched processes. See the [source-by-source comparison](references/related-work.md); finite diagnostics do not replace the analytical proofs.
+Square-root entropy flow under Brownian phase diffusion appears in Wiseman's laser-beam analysis. Generalized-dephasing capacity tools, collective-charge encoding, Gaussian entropy extremality and periodic Fourier differentiation are established ingredients. The [related-work account](references/related-work.md) traces their roles in the fixed-qubit capacity laws, the growing-window construction and the sharp discrimination law for the Brownian and uniform-reset pair.
 
 ## Reproduce
 
@@ -82,7 +97,7 @@ python3 -m pip install -r verification/requirements.txt
 python3 verification/check_phase_drift.py
 ```
 
-The script checks exact finite channel identities, the four-carrier diagnostic, Gaussian entropy bounds, Brownian-bridge moments and the analytic integral constant. [Verification details](verification/README.md) state the tested sizes, output and limits.
+The script checks the finite channel identities, the diagnostics at both window sizes, the signed Fourier stencil, Gaussian entropy bounds, Brownian-bridge moments and the analytic integral constant. [Verification details](verification/README.md) state the tested sizes, output and limits.
 
 ## Purpose and contact
 

@@ -633,12 +633,12 @@
       "environment_dimension": 280,
       "channel_max_difference": 2.220446049250313e-16,
       "environment_gram_max_difference": 2.220446049250313e-16,
-      "minimum_environment_eigenvalue": -2.661015464695773e-17,
-      "environment_entropy_bits": 4.752239757979944,
+      "minimum_environment_eigenvalue": -3.240464084759348e-17,
+      "environment_entropy_bits": 4.752239757979947,
       "pinched_entropy_bits": 7.980124203385607,
       "analytical_entropy_upper_bound_bits": 7.980124203385608,
       "pinched_entropy_formula_difference": 8.881784197001252e-16,
-      "entropy_bound_slack_bits": 3.227884445405663
+      "entropy_bound_slack_bits": 3.2278844454056603
     }
   ],
   "asymptotic_integral": {
@@ -648,6 +648,508 @@
     "absolute_difference": 8.881784197001252e-16,
     "coefficient_bound": 1.1330900354567988
   },
+  "periodic_stencil": [
+    {
+      "r": 1,
+      "kappa": 0.001,
+      "relative_stencil_spectral_error": 0.0,
+      "maximum_matched_harmonic_difference": 0.0,
+      "maximum_grid_endpoint_entropy_bits": 0.008209665887277402
+    },
+    {
+      "r": 1,
+      "kappa": 0.06,
+      "relative_stencil_spectral_error": 0.0,
+      "maximum_matched_harmonic_difference": 0.0,
+      "maximum_grid_endpoint_entropy_bits": 0.24042888076610822
+    },
+    {
+      "r": 1,
+      "kappa": 0.25,
+      "relative_stencil_spectral_error": 0.0,
+      "maximum_matched_harmonic_difference": 0.0,
+      "maximum_grid_endpoint_entropy_bits": 0.5983279131922558
+    },
+    {
+      "r": 2,
+      "kappa": 0.00025,
+      "relative_stencil_spectral_error": 1.1102230246251565e-16,
+      "maximum_matched_harmonic_difference": 0.0,
+      "maximum_grid_endpoint_entropy_bits": 0.008899581211162312
+    },
+    {
+      "r": 2,
+      "kappa": 0.015,
+      "relative_stencil_spectral_error": 1.1102230246251565e-16,
+      "maximum_matched_harmonic_difference": 0.0,
+      "maximum_grid_endpoint_entropy_bits": 0.2851844979545259
+    },
+    {
+      "r": 2,
+      "kappa": 0.0625,
+      "relative_stencil_spectral_error": 1.1102230246251565e-16,
+      "maximum_matched_harmonic_difference": 0.0,
+      "maximum_grid_endpoint_entropy_bits": 0.7969923955508849
+    },
+    {
+      "r": 3,
+      "kappa": 0.00011111111111111112,
+      "relative_stencil_spectral_error": 9.868649107779169e-17,
+      "maximum_matched_harmonic_difference": 0.0,
+      "maximum_grid_endpoint_entropy_bits": 0.009169637600489632
+    },
+    {
+      "r": 3,
+      "kappa": 0.006666666666666666,
+      "relative_stencil_spectral_error": 9.868649107779169e-17,
+      "maximum_matched_harmonic_difference": 0.0,
+      "maximum_grid_endpoint_entropy_bits": 0.30203684724777935
+    },
+    {
+      "r": 3,
+      "kappa": 0.027777777777777776,
+      "relative_stencil_spectral_error": 9.868649107779169e-17,
+      "maximum_matched_harmonic_difference": 0.0,
+      "maximum_grid_endpoint_entropy_bits": 0.8697514162963997
+    },
+    {
+      "r": 8,
+      "kappa": 1.5625e-05,
+      "relative_stencil_spectral_error": 1.1102230246251565e-16,
+      "maximum_matched_harmonic_difference": 0.0,
+      "maximum_grid_endpoint_entropy_bits": 0.009540143679090375
+    },
+    {
+      "r": 8,
+      "kappa": 0.0009375,
+      "relative_stencil_spectral_error": 1.1102230246251565e-16,
+      "maximum_matched_harmonic_difference": 0.0,
+      "maximum_grid_endpoint_entropy_bits": 0.3247196096918571
+    },
+    {
+      "r": 8,
+      "kappa": 0.00390625,
+      "relative_stencil_spectral_error": 1.1102230246251565e-16,
+      "maximum_matched_harmonic_difference": 1.1102230246251565e-16,
+      "maximum_grid_endpoint_entropy_bits": 0.9660768501642913
+    },
+    {
+      "r": 32,
+      "kappa": 9.765625e-07,
+      "relative_stencil_spectral_error": 6.9003079238858e-17,
+      "maximum_matched_harmonic_difference": 0.0,
+      "maximum_grid_endpoint_entropy_bits": 0.009719465038195147
+    },
+    {
+      "r": 32,
+      "kappa": 5.859375e-05,
+      "relative_stencil_spectral_error": 6.9003079238858e-17,
+      "maximum_matched_harmonic_difference": 1.1102230246251565e-16,
+      "maximum_grid_endpoint_entropy_bits": 0.335548785389559
+    },
+    {
+      "r": 32,
+      "kappa": 0.000244140625,
+      "relative_stencil_spectral_error": 6.9003079238858e-17,
+      "maximum_matched_harmonic_difference": 0.0,
+      "maximum_grid_endpoint_entropy_bits": 1.0114819891534053
+    },
+    {
+      "r": 128,
+      "kappa": 6.103515625e-08,
+      "relative_stencil_spectral_error": 1.1891800079878498e-16,
+      "maximum_matched_harmonic_difference": 0.0,
+      "maximum_grid_endpoint_entropy_bits": 0.009765541608625522
+    },
+    {
+      "r": 128,
+      "kappa": 3.662109375e-06,
+      "relative_stencil_spectral_error": 1.1891800079878498e-16,
+      "maximum_matched_harmonic_difference": 1.1102230246251565e-16,
+      "maximum_grid_endpoint_entropy_bits": 0.33831775255234814
+    },
+    {
+      "r": 128,
+      "kappa": 1.52587890625e-05,
+      "relative_stencil_spectral_error": 1.1891800079878498e-16,
+      "maximum_matched_harmonic_difference": 1.1102230246251565e-16,
+      "maximum_grid_endpoint_entropy_bits": 1.0230371247350785
+    }
+  ],
+  "growing_diagnostic_matches": [
+    {
+      "r": 1,
+      "n": 3,
+      "kappa": 0.001,
+      "gaps": [
+        1.0,
+        1.0
+      ],
+      "max_difference": 0.0
+    },
+    {
+      "r": 1,
+      "n": 3,
+      "kappa": 0.001,
+      "gaps": [
+        2.0,
+        3.0
+      ],
+      "max_difference": 0.0
+    },
+    {
+      "r": 1,
+      "n": 3,
+      "kappa": 0.001,
+      "gaps": [
+        0.25,
+        1.75
+      ],
+      "max_difference": 0.0
+    },
+    {
+      "r": 1,
+      "n": 3,
+      "kappa": 0.015,
+      "gaps": [
+        1.0,
+        1.0
+      ],
+      "max_difference": 0.0
+    },
+    {
+      "r": 1,
+      "n": 3,
+      "kappa": 0.015,
+      "gaps": [
+        2.0,
+        3.0
+      ],
+      "max_difference": 0.0
+    },
+    {
+      "r": 1,
+      "n": 3,
+      "kappa": 0.015,
+      "gaps": [
+        0.25,
+        1.75
+      ],
+      "max_difference": 0.0
+    },
+    {
+      "r": 2,
+      "n": 5,
+      "kappa": 0.001,
+      "gaps": [
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ],
+      "max_difference": 0.0
+    },
+    {
+      "r": 2,
+      "n": 5,
+      "kappa": 0.001,
+      "gaps": [
+        2.0,
+        3.0,
+        1.0,
+        2.0
+      ],
+      "max_difference": 0.0
+    },
+    {
+      "r": 2,
+      "n": 5,
+      "kappa": 0.001,
+      "gaps": [
+        0.25,
+        1.75,
+        0.5,
+        2.25
+      ],
+      "max_difference": 0.0
+    },
+    {
+      "r": 2,
+      "n": 5,
+      "kappa": 0.015,
+      "gaps": [
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ],
+      "max_difference": 0.0
+    },
+    {
+      "r": 2,
+      "n": 5,
+      "kappa": 0.015,
+      "gaps": [
+        2.0,
+        3.0,
+        1.0,
+        2.0
+      ],
+      "max_difference": 1.1102230246251565e-16
+    },
+    {
+      "r": 2,
+      "n": 5,
+      "kappa": 0.015,
+      "gaps": [
+        0.25,
+        1.75,
+        0.5,
+        2.25
+      ],
+      "max_difference": 0.0
+    },
+    {
+      "r": 3,
+      "n": 7,
+      "kappa": 0.001,
+      "gaps": [
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ],
+      "max_difference": 0.0
+    },
+    {
+      "r": 3,
+      "n": 7,
+      "kappa": 0.001,
+      "gaps": [
+        2.0,
+        3.0,
+        1.0,
+        2.0,
+        3.0,
+        1.0
+      ],
+      "max_difference": 1.1102230246251565e-16
+    },
+    {
+      "r": 3,
+      "n": 7,
+      "kappa": 0.001,
+      "gaps": [
+        0.25,
+        1.75,
+        0.5,
+        2.25,
+        0.25,
+        1.75
+      ],
+      "max_difference": 0.0
+    },
+    {
+      "r": 3,
+      "n": 7,
+      "kappa": 0.015,
+      "gaps": [
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ],
+      "max_difference": 1.1102230246251565e-16
+    },
+    {
+      "r": 3,
+      "n": 7,
+      "kappa": 0.015,
+      "gaps": [
+        2.0,
+        3.0,
+        1.0,
+        2.0,
+        3.0,
+        1.0
+      ],
+      "max_difference": 1.1102230246251565e-16
+    },
+    {
+      "r": 3,
+      "n": 7,
+      "kappa": 0.015,
+      "gaps": [
+        0.25,
+        1.75,
+        0.5,
+        2.25,
+        0.25,
+        1.75
+      ],
+      "max_difference": 1.1102230246251565e-16
+    }
+  ],
+  "growing_diagnostic_first_witnesses": [
+    {
+      "r": 1,
+      "n": 4,
+      "kappa": 0.001,
+      "coherence_difference": 0.001996004329996026,
+      "full_matrix_formula_difference": 1.734723475976807e-18
+    },
+    {
+      "r": 1,
+      "n": 4,
+      "kappa": 0.015,
+      "coherence_difference": 0.02911445334820484,
+      "full_matrix_formula_difference": 2.0816681711721685e-17
+    },
+    {
+      "r": 2,
+      "n": 6,
+      "kappa": 0.001,
+      "coherence_difference": 0.003964164157828742,
+      "full_matrix_formula_difference": 4.336808689942018e-18
+    },
+    {
+      "r": 2,
+      "n": 6,
+      "kappa": 0.015,
+      "coherence_difference": 0.05243079328240907,
+      "full_matrix_formula_difference": 0.0
+    },
+    {
+      "r": 3,
+      "n": 8,
+      "kappa": 0.001,
+      "coherence_difference": 0.00585772304499399,
+      "full_matrix_formula_difference": 1.1102230246251565e-16
+    },
+    {
+      "r": 3,
+      "n": 8,
+      "kappa": 0.015,
+      "coherence_difference": 0.06281199345368571,
+      "full_matrix_formula_difference": 1.1102230246251565e-16
+    }
+  ],
+  "growing_diagnostic_block_twirls": [
+    {
+      "model": "A",
+      "block_sizes": [
+        1,
+        2
+      ],
+      "gaps": [
+        0.25,
+        0.75
+      ],
+      "max_difference": 0.0
+    },
+    {
+      "model": "A",
+      "block_sizes": [
+        2,
+        2
+      ],
+      "gaps": [
+        0.25,
+        0.75,
+        1.25
+      ],
+      "max_difference": 1.1102230246251565e-16
+    },
+    {
+      "model": "A",
+      "block_sizes": [
+        2,
+        3
+      ],
+      "gaps": [
+        0.25,
+        0.75,
+        1.25,
+        1.75
+      ],
+      "max_difference": 1.1102230246251565e-16
+    },
+    {
+      "model": "A",
+      "block_sizes": [
+        3,
+        2,
+        1
+      ],
+      "gaps": [
+        0.25,
+        0.75,
+        1.25,
+        1.75,
+        2.25
+      ],
+      "max_difference": 1.1102230246251565e-16
+    },
+    {
+      "model": "B",
+      "block_sizes": [
+        1,
+        2
+      ],
+      "gaps": [
+        0.25,
+        0.75
+      ],
+      "max_difference": 0.0
+    },
+    {
+      "model": "B",
+      "block_sizes": [
+        2,
+        2
+      ],
+      "gaps": [
+        0.25,
+        0.75,
+        1.25
+      ],
+      "max_difference": 1.1102230246251565e-16
+    },
+    {
+      "model": "B",
+      "block_sizes": [
+        2,
+        3
+      ],
+      "gaps": [
+        0.25,
+        0.75,
+        1.25,
+        1.75
+      ],
+      "max_difference": 1.1102230246251565e-16
+    },
+    {
+      "model": "B",
+      "block_sizes": [
+        3,
+        2,
+        1
+      ],
+      "gaps": [
+        0.25,
+        0.75,
+        1.25,
+        1.75,
+        2.25
+      ],
+      "max_difference": 1.1102230246251565e-16
+    }
+  ],
   "limitations": [
     "Finite selected cases do not prove the universal channel identities.",
     "Entropy upper bounds and conservative converse constants are not optimal capacities.",
@@ -668,7 +1170,11 @@
     "asymptotic_integrals": 1,
     "brownian_covariance_degradations": 4,
     "reset_pattern_enumerations": 4,
-    "total": 68
+    "periodic_stencils": 18,
+    "growing_diagnostic_matches": 18,
+    "growing_diagnostic_first_witnesses": 6,
+    "growing_diagnostic_block_twirls": 8,
+    "total": 118
   },
   "status": "passed"
 }

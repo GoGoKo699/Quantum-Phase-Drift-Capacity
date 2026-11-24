@@ -4,14 +4,14 @@ The starting point is one qubit whose phase is unknown. The question grows when 
 
 This map has **exactly 30 milestones**. Each describes an understanding target and its place in that scientific story. The authoritative definitions and proofs remain in [the scientific account](../science/README.md); the map points to them instead of repeating their derivations.
 
-The single educational anchor is **John Preskill, *Quantum Information*, Chapter 10: *Quantum Shannon Theory*, updated June 2025** ([official PDF](https://www.preskill.caltech.edu/ph219/chap10_6A_2025.pdf)). Section numbers below refer to that version. The [anchor and bridge](anchor-and-bridge.md) translates its notation and assumptions, develops a small relational-encoding example, and identifies the additional arguments supplied by this project. A pointer to Preskill identifies the underlying information-theoretic idea; the Brownian and reset results themselves are in the linked project sources.
+The single educational anchor is **John Preskill, *Quantum Information*, Chapter 10: *Quantum Shannon Theory*, updated June 2025** ([official PDF](https://www.preskill.caltech.edu/ph219/chap10_6A_2025.pdf)). Section numbers below refer to that version. The [anchor and bridge](anchor-and-bridge.md) translates its notation and assumptions, develops a small relational-encoding example, and identifies the additional arguments supplied by this project. A pointer to Preskill identifies the underlying information-theoretic idea. The linked project sources give the phase-channel results.
 
 ## How the two phases fit together
 
 | Phase | Milestones | Progression |
 |---|---|---|
 | [Background and preliminaries](#background-and-preliminaries-m01m12) | M01–M12: 12 milestones | From a carrier and a relative coherence to correlated channels, entropy, coding resources, and a complete operational question. |
-| [Narrative and innovation](#narrative-and-innovation-m13m30) | M13–M30: 18 milestones | From exact coding blocks through the two capacity arguments to finite-slot indistinguishability and the global separation. |
+| [Narrative and innovation](#narrative-and-innovation-m13m30) | M13–M30: 18 milestones | From exact coding blocks and two capacity laws to growing selected-channel agreement, its first witness, and absolute capacity certification. |
 
 The allocation gives the shared channel-and-entropy framework twelve milestones. Eighteen then develop the three connected parts of the contribution: the Brownian capacity law, the reset capacity law, and the comparison between short probes and long codes. Each phase ends by integrating its components. The map covers the project's main reasoning and scope; detailed estimates and specialist extensions remain in the scientific pages.
 
@@ -347,36 +347,36 @@ Dependencies name earlier milestones only. They indicate which ideas a target us
 
 ### M28. Three selected slots cannot distinguish the models
 
-**Central question.** Why does matching the first harmonic imply equality of the complete channels through three slots?
+**Central question.** How many selected qubits can access only the first $r$ phase harmonics?
 
-**Understanding target.** Set $p=1-e^{-\kappa/2}$ and use charge neutrality to bound every accessible suffix charge by one for at most three selected carriers. Include arbitrary integer gaps and passive reference systems in the channel identity.
+**Understanding target.** Show that a neutral difference of two $m$-bit strings gives suffix charges of magnitude at most $\lfloor m/2\rfloor$. Recover Brownian/reset agreement through three carriers at $p=1-e^{-\kappa/2}$ and arbitrary integer gaps. For the smooth phase processes, use the equal harmonics through order $r$ to explain the full channel identity on up to $2r+1$ carriers at arbitrary positive real gaps.
 
 **Dependencies and story role.** M03–M04 and M12. The two process definitions meet in a finite experimental equivalence.
 
-**Conceptual connection.** Equality on all matrix units gives equality of the selected-carrier CPTP maps, which is stronger than matching one correlation function. It does not specify a different adaptive process interface with intervening probes.
+**Conceptual connection.** A matrix-unit identity determines the entire selected-carrier CPTP map, including its action on inputs entangled with a passive reference. The selected slots and the one-pass carrier interface specify the diagnostic.
 
-**Source pointers.** Preskill §10.7.1 for the channel viewpoint; [selected-slot equality, §1](../science/indistinguishability.md#1-exact-equality-for-any-choice-of-at-most-three-slots), equations (C1)–(C6).
+**Source pointers.** Preskill §10.7.1 for the channel viewpoint, [selected-slot equality](../science/indistinguishability.md#1-exact-equality-for-any-choice-of-at-most-three-slots), and [matching increment harmonics](../science/growing-diagnostics.md#2-matching-the-increment-harmonics).
 
 ### M29. Four carriers reach the missing Fourier charge
 
-**Central question.** What concrete experiment detects the difference hidden from all three-slot channels?
+**Central question.** What is the first experiment that reaches the missing harmonic?
 
-**Understanding target.** Prepare the equal superposition of $0011$ and $1100$, identify suffix charge two, and obtain the two coherence factors and sign-measurement probabilities. Explain why the preparation and measurement need no shared global phase reference.
+**Understanding target.** Prepare the equal superposition of $0011$ and $1100$ for Brownian drift and resets, identify suffix charge two, and obtain the two sign-measurement probabilities. For the smooth pair use $0^{r+1}1^{r+1}$ and $1^{r+1}0^{r+1}$ on $2r+2$ consecutive carriers. Identify the one factor of charge $r+1$ and the common lower-charge factors.
 
 **Dependencies and story role.** M02, M04, and M28. A realizable diagnostic gives the finite-slot equality an explicit boundary.
 
-**Conceptual connection.** The only unordered pair with a suffix charge of magnitude two at four slots is $0011$ and $1100$. Maximizing that pair's coherence makes the experiment optimal even with a passive reference. For four consecutive slots its single-trial advantage still vanishes with the noise.
+**Conceptual connection.** In the Brownian/reset comparison this is the only unordered pair with a suffix charge of magnitude two at four slots, and maximizing its coherence gives the exact four-carrier optimum. The higher-order construction identifies the first unequal channel for the smooth pair. Both experiments use charge-neutral coherences, so they need no shared global phase reference.
 
-**Source pointers.** Preskill §10.6.1 for the measurement-distinguishability viewpoint; [four-carrier diagnostic, §2](../science/indistinguishability.md#2-four-carriers-provide-an-explicit-diagnostic), equations (C7)–(C10); [exact optimum](../science/discrimination-and-depth.md#exact-four-carrier-optimum).
+**Source pointers.** Preskill §10.6.1 for measurement distinguishability, [four-carrier diagnostic](../science/indistinguishability.md#2-four-carriers-provide-an-explicit-diagnostic), [its exact optimum](../science/discrimination-and-depth.md#exact-four-carrier-optimum), and [the first differing carrier count for the smooth pair](../science/growing-diagnostics.md#3-the-first-differing-carrier-count).
 
 ### M30. Synthesis of diagnostic cost and coding redundancy
 
-**Central question.** How does the number of carriers needed to identify a model relate to the redundancy that each model imposes?
+**Central question.** What can a fully characterized finite channel tell us about the communication redundancy?
 
-**Understanding target.** Combine the capacity laws to obtain the diverging ratio of redundancy fractions. Explain why agreement through three slots and strict four-slot distinguishability can coexist with a growing carrier cost at fixed error. Contrast the product and unrestricted input thresholds, and explain what caps the advantage at intermediate entanglement depth.
+**Understanding target.** Use the smooth capacity bounds to explain why $(1-Q_{\mathrm A})/(1-Q_{\mathrm B})$ diverges when $r=o(\kappa^{-1/4}/\sqrt{\log_2(1/\kappa)})$, even though the number of matched carriers can grow. Use exact blocking, the finite phase key, and optimized coherent information to derive the absolute certificate $J(\mathcal N_n)/n\le Q\le [J(\mathcal N_n)+\log_2(n+1)]/n$. Compare the width of the certificate to the deficits it must resolve.
 
-**Dependencies and story role.** M12, M22, M27–M29. This connects two operational questions on the same pair of channels.
+**Dependencies and story role.** M12–M14, M22, and M27–M29. This connects the operational coding rate with the information available from small diagnostics.
 
-**Conceptual connection.** The capacity comparison asks what redundancy a known channel demands. The discrimination comparison asks how much evidence identifies the channel first. Depth constrains input entanglement among carriers, so the product-input comparison can still use joint readout.
+**Conceptual connection.** Equal consecutive block channels give the same absolute capacity certificate. Its width can exceed the deficit itself, leaving the leading redundancy unresolved. In the Brownian/reset example the first unequal channel appears at four carriers, while reliable hypothesis testing at fixed error costs order $\kappa^{-1/2}$ carriers at input depth one or $\kappa^{-1/3}$ with unrestricted depth. Joint readout is allowed in both cases.
 
-**Source pointers.** Preskill §10.7 for the capacity framework; [capacity separation, §3](../science/indistinguishability.md#3-consequence-for-asymptotic-quantum-communication), equations (C11)–(C12); [fixed-error resource law](../science/discrimination-and-depth.md#fixed-error-resource-law); [related work](../references/related-work.md); [verification and its limits](../verification/README.md#relationship-to-the-proofs).
+**Source pointers.** Preskill §§10.7 and 10.9.4 for the capacity framework, [original Brownian/reset capacity comparison](../science/indistinguishability.md#3-consequence-for-asymptotic-quantum-communication), [smooth capacity deficits](../science/growing-diagnostics.md#4-bounding-the-capacity-deficits), [finite-block capacity certificate](../science/growing-diagnostics.md#5-an-absolute-capacity-certificate-from-a-finite-channel), and [Brownian/reset fixed-error resource law](../science/discrimination-and-depth.md#fixed-error-resource-law).

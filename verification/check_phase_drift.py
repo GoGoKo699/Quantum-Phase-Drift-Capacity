@@ -670,7 +670,178 @@ def check_integral() -> dict[str, float]:
     }
 
 
+def periodic_stencil(r: int) -> np.ndarray:
+    """Periodic second-derivative weights on the 2r-point circle."""
+    sites = np.arange(1, 2 * r)
+    stencil = np.empty(2 * r)
+    stencil[0] = -(2 * r**2 + 1) / 6
+    distance = np.minimum(sites, 2 * r - sites)
+    stencil[1:] = -((-1.0) ** sites) / (2 * np.sin(np.pi * distance / (2 * r)) ** 2)
+    return stencil
+
+
+def jump_laws(r: int) -> tuple[np.ndarray, np.ndarray]:
+    """The normalized negative and positive parts of the stencil."""
+    stencil = periodic_stencil(r)
+    mass = r**2 / 2
+    return np.maximum(-stencil, 0) / mass, np.maximum(stencil, 0) / mass
+
+
+def jump_generators(r: int, kappa: float) -> tuple[np.ndarray, np.ndarray]:
+    intensity = kappa * r**2 / 4
+    negative, positive = jump_laws(r)
+    return (
+        intensity * (np.fft.fft(negative).real - 1),
+        intensity * (np.fft.fft(positive).real - 1),
+    )
+
+
+def hierarchy_generator(
+    r: int, kappa: float, model: str, charges: np.ndarray
+) -> np.ndarray:
+    """Real Fourier generator, including the nonperiodic Gaussian factor."""
+    negative, positive = jump_generators(r, kappa)
+    residues = charges % (2 * r)
+    if model == "A":
+        return negative[residues] - (kappa + kappa**4) * charges**2 / 2
+    return positive[residues] - kappa**4 * charges**2 / 2
+
+
+def hierarchy_schur(
+    n: int, r: int, kappa: float, model: str, gaps: list[float]
+) -> np.ndarray:
+    diff = differences(n)
+    total = diff.sum(axis=2)
+    suffix = total[:, :, None] - np.cumsum(diff[:, :, :-1], axis=2)
+    generator = hierarchy_generator(r, kappa, model, suffix)
+    return (total == 0) * np.exp(generator @ np.asarray(gaps))
+
+
+def check_periodic_stencil() -> list[dict[str, Any]]:
+    results = []
+    for r in (1, 2, 3, 8, 32, 128):
+        sites = np.arange(2 * r)
+        harmonics = np.minimum(sites, 2 * r - sites)
+        stencil = periodic_stencil(r)
+        spectral_error = max_abs(np.fft.fft(stencil) + harmonics**2) / r**2
+        require(spectral_error <= ALGEBRA_TOL, f"Wrong stencil spectrum for r={r}.")
+        require(
+            abs(np.abs(stencil).sum() / r**2 - 1) <= ALGEBRA_TOL,
+            f"Wrong stencil total variation for r={r}.",
+        )
+        laws = jump_laws(r)
+        for law in laws:
+            require(
+                law.min() >= 0 and abs(law.sum() - 1) <= ALGEBRA_TOL,
+                f"Unnormalized jump law for r={r}.",
+            )
+        for scale in (0.001, 0.06, 0.25):
+            kappa = scale / r**2
+            negative, positive = jump_generators(r, kappa)
+            endpoint_entropy = []
+            match_error = 0.0
+            for gap in (0.25, 1.0, 2.75):
+                for generator, law in zip((negative, positive), laws):
+                    spectrum = np.exp(gap * generator)
+                    endpoint = np.fft.ifft(spectrum)
+                    require(
+                        max_abs(endpoint.imag) <= ALGEBRA_TOL,
+                        f"Complex endpoint law for r={r}, gap={gap}.",
+                    )
+                    value = entropy(endpoint.real, f"Compound-Poisson r={r}, gap={gap}")
+                    mean = gap * scale / 4
+                    bound = bose_entropy(mean) + mean * entropy(law, f"Jump law r={r}")
+                    require(value <= bound + ENTROPY_TOL, f"Endpoint entropy bound for r={r}.")
+                    endpoint_entropy.append(value)
+                match_error = max(
+                    match_error,
+                    max_abs(
+                        np.exp(gap * hierarchy_generator(r, kappa, "A", harmonics))
+                        - np.exp(gap * hierarchy_generator(r, kappa, "B", harmonics))
+                    ),
+                )
+            require(match_error <= ALGEBRA_TOL, f"Matched harmonics differ for r={r}.")
+            results.append(
+                {
+                    "r": r,
+                    "kappa": kappa,
+                    "relative_stencil_spectral_error": spectral_error,
+                    "maximum_matched_harmonic_difference": match_error,
+                    "maximum_grid_endpoint_entropy_bits": max(endpoint_entropy),
+                }
+            )
+    return results
+
+
+def check_growing_diagnostics() -> tuple[list[dict[str, Any]], list[dict[str, Any]]]:
+    matches = []
+    witnesses = []
+    for r, kappa in itertools.product((1, 2, 3), (0.001, 0.015)):
+        n = 2 * r + 1
+        for pattern in ([1.0], [2.0, 3.0, 1.0], [0.25, 1.75, 0.5, 2.25]):
+            gaps = list(itertools.islice(itertools.cycle(pattern), n - 1))
+            channel_a = hierarchy_schur(n, r, kappa, "A", gaps)
+            channel_b = hierarchy_schur(n, r, kappa, "B", gaps)
+            error = max_abs(channel_a - channel_b)
+            require(error <= ALGEBRA_TOL, f"Selected-slot match failed for r={r}.")
+            matches.append(
+                {"r": r, "n": n, "kappa": kappa, "gaps": gaps, "max_difference": error}
+            )
+
+        n += 1
+        consecutive = [1.0] * (n - 1)
+        channel_a = hierarchy_schur(n, r, kappa, "A", consecutive)
+        channel_b = hierarchy_schur(n, r, kappa, "B", consecutive)
+        observed = channel_b - channel_a
+        left = (1 << (r + 1)) - 1
+        right = left << (r + 1)
+        lower = hierarchy_generator(r, kappa, "B", np.arange(1, r + 1))
+        first_high = hierarchy_generator(r, kappa, "A", np.array([r + 1]))[0]
+        predicted = np.exp(2 * lower.sum() + first_high) * np.expm1(2 * kappa * r)
+        require(observed[left, right] > 0, f"First witness has wrong sign for r={r}.")
+        expected = np.zeros_like(observed)
+        expected[left, right] = expected[right, left] = predicted
+        error = max_abs(observed - expected)
+        require(error <= ALGEBRA_TOL, f"Wrong first-witness formula for r={r}.")
+        witnesses.append(
+            {
+                "r": r,
+                "n": n,
+                "kappa": kappa,
+                "coherence_difference": float(observed[left, right]),
+                "full_matrix_formula_difference": error,
+            }
+        )
+    return matches, witnesses
+
+
+def check_hierarchy_block_factorization() -> list[dict[str, Any]]:
+    results = []
+    for model, sizes in itertools.product(("A", "B"), ((1, 2), (2, 2), (2, 3), (3, 2, 1))):
+        n = sum(sizes)
+        r, kappa = 2, 0.015
+        gaps = [0.25 + lane / 2 for lane in range(n - 1)]
+        joint = hierarchy_schur(n, r, kappa, model, gaps)
+        twirl = np.ones((1, 1))
+        product = np.ones((1, 1))
+        start = 0
+        for size in sizes:
+            stop = start + size
+            weights = bits(size).sum(axis=1)
+            twirl = np.kron(twirl, weights[:, None] == weights[None, :])
+            block = hierarchy_schur(size, r, kappa, model, gaps[start : stop - 1])
+            product = np.kron(product, block)
+            start = stop
+        error = max_abs(joint * twirl - product)
+        require(error <= ALGEBRA_TOL, f"Separate charge twirls failed for model {model}.")
+        results.append(
+            {"model": model, "block_sizes": sizes, "gaps": gaps, "max_difference": error}
+        )
+    return results
+
+
 def run_checks() -> dict[str, Any]:
+    growing_matches, first_witnesses = check_growing_diagnostics()
     results: dict[str, Any] = {
         "scope": (
             "Finite algebra, covariance, entropy, and discrimination diagnostics; "
@@ -698,6 +869,10 @@ def run_checks() -> dict[str, Any]:
         "brownian_covariance_degradation": check_brownian_degradation(),
         "reset_pattern_enumeration": check_reset_enumeration(),
         "asymptotic_integral": check_integral(),
+        "periodic_stencil": check_periodic_stencil(),
+        "growing_diagnostic_matches": growing_matches,
+        "growing_diagnostic_first_witnesses": first_witnesses,
+        "growing_diagnostic_block_twirls": check_hierarchy_block_factorization(),
         "limitations": [
             "Finite selected cases do not prove the universal channel identities.",
             "Entropy upper bounds and conservative converse constants are not optimal capacities.",
@@ -719,6 +894,10 @@ def run_checks() -> dict[str, Any]:
         "asymptotic_integrals": 1,
         "brownian_covariance_degradations": len(results["brownian_covariance_degradation"]),
         "reset_pattern_enumerations": len(results["reset_pattern_enumeration"]),
+        "periodic_stencils": len(results["periodic_stencil"]),
+        "growing_diagnostic_matches": len(growing_matches),
+        "growing_diagnostic_first_witnesses": len(first_witnesses),
+        "growing_diagnostic_block_twirls": len(results["growing_diagnostic_block_twirls"]),
     }
     counts["total"] = sum(counts.values())
     results["case_counts"] = counts
@@ -766,6 +945,13 @@ def main(argv: list[str] | None = None) -> int:
     )
     summary["maximum_group_phase_covariance_error"] = max(
         case["covariance_residual"] for case in results["group_phase_moments"]
+    )
+    summary["maximum_growing_diagnostic_channel_error"] = max(
+        case["max_difference"] for case in results["growing_diagnostic_matches"]
+    )
+    summary["maximum_growing_diagnostic_witness_error"] = max(
+        case["full_matrix_formula_difference"]
+        for case in results["growing_diagnostic_first_witnesses"]
     )
     print(json.dumps(summary, indent=2, allow_nan=False))
     return 0

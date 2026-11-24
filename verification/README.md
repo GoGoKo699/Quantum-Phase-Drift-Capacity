@@ -2,7 +2,7 @@
 
 [check_phase_drift.py](check_phase_drift.py) checks finite instances of the channel identities, covariance decompositions, entropy bounds, and discrimination formulas. The deterministic calculations enumerate small bit-string and reset-pattern spaces, diagonalize matrices, evaluate Gaussian moments, and perform one-dimensional quadrature.
 
-The recorded reference run passed **68 cases**. Full parameters, numerical outputs, tolerances, and software versions are in [expected-results.json](expected-results.json).
+The recorded reference run passed **118 cases**. Full parameters, numerical outputs, tolerances, and software versions are in [expected-results.json](expected-results.json).
 
 ## Reproduce the calculations
 
@@ -53,9 +53,13 @@ Here $n$ is the number of qubit carriers, $\kappa$ is the Brownian increment var
 | Entropy integral | 1 | Quadrature over $u\in(0,\infty)$. | The integral in the achievable coefficient agrees with $\pi^2/(4\ln2)$. |
 | Brownian covariance degradation | 4 | $(n,L,\kappa)=(2,2,0.03),(5,2,0.2),(6,3,0.5),(7,3,0.07)$. | Independent bridge and interpolation/tail covariances reconstruct the original covariance, and their channel composition reproduces the original Schur matrix. |
 | Reset-pattern enumeration and pinching | 4 | $(n,p)=(1,0.1),(2,0.05),(4,0.2),(5,0.6)$. | Explicit segment-twirl mixtures agree with the increment formula; coherent environment vectors have the correct Gram matrix; pinching the reset flag gives the stated entropy upper bound. |
-| **Total** | **68** | | |
+| Periodic stencil and jump laws | 18 | $r=1,2,3,8,32,128$ and $\kappa r^2=0.001,0.06,0.25$, at gaps $0.25,1,2.75$. | The stencil has the required spectrum and variation. The two jump and endpoint laws are normalized and nonnegative to tolerance, satisfy the endpoint entropy bound and match the smoothed harmonics through order $r$. |
+| Growing selected-slot match | 18 | $r=1,2,3$ and $\kappa=0.001,0.015$, with three gap lists per pair. | The full $(2r+1)$-carrier Schur matrices agree on consecutive slots, on irregular integer gaps and on irregular real gaps. |
+| First growing diagnostic | 6 | $r=1,2,3$ and $\kappa=0.001,0.015$. | At $2r+2$ consecutive carriers the channel difference has precisely the predicted conjugate pair of entries to tolerance, with the positive coherence difference given by the formula. |
+| Separate charge twirls for the growing family | 8 | Both increment laws with $r=2$ and $\kappa=0.015$, four block partitions and irregular real gaps. | Applying separate charge twirls to the joint channel gives the product of standalone block channels. |
+| **Total** | **118** | | |
 
-The largest selected-carrier Schur matrix is $128\times128$, at $n=7$. The reset checks enumerate $1,2,8,$ and $16$ reset patterns, respectively, for **27 patterns in total**. Their explicitly constructed environment dimensions are $2,7,82,$ and $280$.
+The largest matched matrix is $128\times128$, at $n=7$. The largest first-distinguishing matrix is $256\times256$, at $n=8$. The reset checks enumerate $1,2,8,$ and $16$ reset patterns, respectively, for **27 patterns in total**. Their explicitly constructed environment dimensions are $2,7,82,$ and $280$.
 
 The degradation cases include both complete block tilings and a one-slot tail. The tail is noiseless in the enhanced bridge channel and acquires its original correlated phase in the postprocessing. The reset-environment calculation retains coherence between reset records before pinching, rather than assuming that the complementary state is initially block diagonal.
 
@@ -74,6 +78,11 @@ These values summarize the full output in [expected-results.json](expected-resul
 | Largest reset pinching entropy-formula residual | $8.881784197001252\times10^{-16}$ |
 | Largest four-slot trace-norm residual | $1.1102230246251565\times10^{-16}$ |
 | Largest group phase covariance residual | $1.1102230246251565\times10^{-16}$ |
+| Largest relative stencil spectrum residual | $1.1891800079878498\times10^{-16}$ |
+| Largest matched-harmonic residual | $1.1102230246251565\times10^{-16}$ |
+| Largest growing selected-slot equality residual | $1.1102230246251565\times10^{-16}$ |
+| Largest first growing witness formula residual | $1.1102230246251565\times10^{-16}$ |
+| Largest growing-family block factorization residual | $1.1102230246251565\times10^{-16}$ |
 
 The algebra tolerance is $10^{-12}$, the entropy tolerance is $10^{-10}$, and the integral comparison tolerance is $10^{-6}$. Numerical positivity checks permit eigenvalues down to $-10^{-12}$, accommodating roundoff at singular matrices. A recorded zero is a floating-point result; the exact identity comes from its proof.
 
@@ -98,6 +107,7 @@ The authoritative mathematical arguments and operational assumptions are in:
 - [Reset capacity](../science/reset-capacity.md): coherent environment pinching, renewal boundary terms, and the finite-length Schmidt-number converse.
 - [Selected-slot indistinguishability](../science/indistinguishability.md): equality for arbitrary choices of at most three slots and the explicit four-slot diagnostic.
 - [Discrimination and entanglement depth](../science/discrimination-and-depth.md) proves the four-carrier optimum and gives matching fixed-error carrier bounds for each input depth.
+- [Growing diagnostic size](../science/growing-diagnostics.md) derives the signed Fourier stencil, exact equality through $2r+1$ selected carriers, the first distinguishing coherence, and the capacity separation.
 
 The finite calculations can expose indexing, normalization, covariance, or entropy-inequality mistakes in the checked cases. They do not establish the universal identities for all train lengths or gaps. In particular, these diagnostics do not numerically test every input distribution or substitute for either channel's coding converse.
 
