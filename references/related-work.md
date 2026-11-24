@@ -123,6 +123,15 @@ The [fixed-error resource law](../science/discrimination-and-depth.md) uses bina
 
 The exact single-pair trace-norm calculation uses the standard binary state discrimination formula. The fixed-error scaling follows from the common-phase channel comparison and the explicit timed probe groups. These distinctions are a targeted comparison of models and results.
 
+## Inferring capacity from selected carriers
+
+The [growing-window theorem](../science/growing-diagnostics.md) extends the fixed three-carrier equality to an arbitrary prescribed odd window. The limit concerns complete reduced channels on each chosen set of slots. Measurements that retain joint data across a larger set can access additional harmonics.
+
+- **Periodic differentiation.** L. N. Trefethen, *Spectral Methods in MATLAB*, [Chapter 3](https://doi.org/10.1137/1.9780898719598.ch3), gives the signed second-differentiation stencil on an even periodic grid. Splitting that stencil into two positive jump measures and adding Brownian diffusion realizes the exact Fourier agreement with physical phase processes. The capacity comparison then uses the Brownian bounds proved in this repository.
+- **Capacity estimation with correlated errors.** C. Pfister, M. A. Rol, A. Mantri, M. Tomamichel and S. Wehner, *Capacity estimation and verification of quantum channels with arbitrarily correlated errors*, [Nature Communications 9, 27 (2018)](https://doi.org/10.1038/s41467-017-00961-2), use data pooled across a train to bound one-shot capacity. The growing-window theorem asks what the collection of complete channels on bounded-size selected sets determines about the asymptotic capacity deficit.
+- **Coding for memory channels.** D. Kretschmann and R. F. Werner, *Quantum channels with memory*, [Phys. Rev. A 72, 062323 (2005)](https://doi.org/10.1103/PhysRevA.72.062323), give general coding results for forgetful channels. In the independent-increment phase train, exact charge twirls yield product blocks. A classical phase key bounds the coherent information lost in that factorization and gives an explicit finite-block absolute capacity interval.
+- **Local carrier dimension.** Lami and Wilde's [multimode result](#lw) and Huang, Lami and Wilde's bosonic sensing result above allow access to local Fock levels beyond the qubit subspace. The charge ceiling for one-pass qubit carriers sets the exact range of harmonics in the growing-window construction.
+
 ## Educational anchor
 
 John Preskill, **Quantum Information, Chapter 10: Quantum Shannon Theory**, updated June 2025. [Official author-hosted PDF](https://www.preskill.caltech.edu/ph219/chap10_6A_2025.pdf).

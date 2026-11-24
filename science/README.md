@@ -1,6 +1,6 @@
 # Scientific account
 
-The central distinction is between noise seen by a few carriers and the information lost by a long, optimally encoded train. Every single-carrier marginal in this model is completely dephasing, yet temporal correlations allow the quantum communication rate to approach one qubit per slot. The way the phase changes determines how rapidly that limit is approached. It also sets the train length needed to distinguish two processes that agree on every experiment using at most three selected carriers.
+Every single-carrier marginal in this model is completely dephasing. Temporal correlations can still support a quantum communication rate close to one qubit per slot. How the phase changes determines the redundancy needed to approach that limit. Even complete channel data on a growing number of carriers can leave that redundancy ambiguous.
 
 ## Reading route
 
@@ -9,6 +9,7 @@ The central distinction is between noise seen by a few carriers and the informat
 3. [Reset capacity](reset-capacity.md) proves upper and lower rate bounds for a phase held constant between independent uniform resets. It includes a finite-length fidelity bound for arbitrary encoders and the renewal estimates behind the small-noise law.
 4. [Indistinguishability and separation](indistinguishability.md) matches the two parameters, proves equality of every channel through three selected slots, and gives a physical four-carrier diagnostic. It combines the two capacity results to obtain an unbounded ratio of redundancy fractions.
 5. [Discrimination and entanglement depth](discrimination-and-depth.md) proves optimality on any four fixed slots and determines the consecutive train length needed at fixed error. The lower bounds cover joint readout, and the constructions attain them at each input entanglement depth.
+6. [Growing diagnostic window](growing-diagnostics.md) constructs two smooth phase processes with exactly matched channels through $2r+1$ carriers, a first difference at $2r+2$, and parametrically different capacity deficits. It also bounds the absolute capacity using the optimized coherent information of any finite block in the independent-increment model.
 
 The [related-work account](../references/related-work.md) separates standard tools and model ancestors from this specific consequence. [Reproduction checks](../verification/README.md) provide finite diagnostics of the load-bearing identities.
 
@@ -24,6 +25,6 @@ For discrimination, the $N$ carriers are consecutive, with one pass per carrier 
 
 An unknown constant phase removes coherence only between total-charge sectors. Encoding within a large sector therefore loses a sublinear number of logical qubits. Gradual Brownian drift creates additional local phase distinctions throughout the train. The converse identifies blocks of order $\kappa^{-1/2}$ carriers that incur a fixed unavoidable information loss. Rare resets instead create long constant-phase segments; their charge-sector losses accumulate at order $p\log(1/p)$ per carrier.
 
-Matching all channels through three slots fixes only the Fourier charges that such probes can access. A four-slot neutral coherence reaches charge two, and this is the unique off-diagonal pair that separates the two channels there. Longer balanced superpositions sustain large intermediate charges and amplify gradual drift over many time steps. At depth one, relative-phase changes instead accumulate across paired singlet tests.
+Total-charge balance limits the Fourier harmonics accessible to an $m$-carrier probe to order $\lfloor m/2\rfloor$. For Brownian drift and uniform resets, the first separating coherence reaches charge two on four carriers. In the growing-window construction, a signed periodic differentiation stencil is split into two compound-Poisson generators. One Gaussian component compensates for their difference on the accessible harmonics. A finite block still bounds absolute capacity because removing interblock phase correlations costs at most the entropy of one discrete phase key per block.
 
 The capacity limits take long trains at fixed noise first. The discrimination result fixes a target error and studies train length as the noise weakens. Both use the same ideal phase-only channel.

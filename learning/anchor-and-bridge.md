@@ -17,7 +17,7 @@ The single educational anchor is **John Preskill, *Quantum Information*, Chapter
 | [10.7.3](https://www.preskill.caltech.edu/ph219/chap10_6A_2025.pdf#page=62) | 56–58 | Degradability and additivity for the finite channels used here. |
 | [10.9.4](https://www.preskill.caltech.edu/ph219/chap10_6A_2025.pdf#page=81) | 75–76 | The unassisted coding step after independent blocks have been obtained. |
 
-These sections provide the information-theoretic framework. The phase-process identities, Gaussian environment estimate, Brownian-bridge converse, and reset renewal argument are supplied by this repository. The [primary research references](../references/related-work.md) document their separate mathematical ingredients and antecedents.
+These sections provide the information-theoretic framework. The phase-process identities, Gaussian environment estimate, Brownian-bridge converse, reset renewal argument, and finite-block capacity certificate are supplied by this repository. The [primary research references](../references/related-work.md) document their separate mathematical ingredients and antecedents.
 
 ## 2. Translate notation and resources
 
@@ -160,10 +160,30 @@ The [exact four-carrier optimum](../science/discrimination-and-depth.md#exact-fo
 
 Fixing a target discrimination error changes the question. At depth one the sender can prepare product inputs and the receiver can use singlet tests on early–late pairs. The probability of an observable phase change accumulates across the pairs, yielding a carrier count of order $\kappa^{-1/2}$. At higher depth the sender can prepare balanced superpositions whose different time distributions of excitations amplify gradual drift. The [fixed-error law](../science/discrimination-and-depth.md#fixed-error-resource-law) gives order $\max\left(\kappa^{-1/3},(\kappa d)^{-1/2}\right)$ at depth $d$, including the unrestricted scale $\kappa^{-1/3}$. The [lower bounds](../science/discrimination-and-depth.md#lower-bounds) compare each hypothesis with the same common-phase channel. The [probe constructions](../science/discrimination-and-depth.md#attaining-the-law) use no shared global phase reference.
 
+### Growing the number of matched carriers
+
+For $m$ qubit carriers, a neutral ket-minus-bra difference is made of equally many $+1$ and $-1$ entries, with the remaining entries zero. A suffix charge can therefore have magnitude at most $\lfloor m/2\rfloor$. If two increment laws have the same harmonics of magnitudes $0$ through $r$ for each time gap, every matrix unit has the same multiplier through $2r+1$ selected carriers. Equality of the resulting channels also covers passive reference systems.
+
+The [pair with smooth increment densities](../science/growing-diagnostics.md#2-matching-the-increment-harmonics) uses a signed finite-grid identity. Splitting the positive and negative coefficients into separate jump laws makes both increment processes physical. Adding a small independent Gaussian variance to both laws gives smooth transition densities and preserves their harmonic equality at arbitrary positive real gaps. The first unequal harmonic in this construction is $r+1$. The coherence between $0^{r+1}1^{r+1}$ and $1^{r+1}0^{r+1}$ on $2r+2$ selected carriers reaches that charge once, while all other factors are common and nonzero. This gives an explicit first distinguishing experiment. [First differing carrier count](../science/growing-diagnostics.md#3-the-first-differing-carrier-count)
+
+At unit cadence, the process with an additional Brownian component of variance $\kappa$ per step loses capacity of order $\sqrt{\kappa}$ in the separation regime. For the jump-dominated process, small net-jump entropy bounds the deficit by order $\kappa r^2\log_2(e/(\kappa r^2))$ plus the order $\kappa^2$ cost of Gaussian smoothing. The deficit ratio diverges for $r=o(\kappa^{-1/4}/\sqrt{\log_2(1/\kappa)})$, so the number of carriers on which the two laws match can grow as the noise weakens. The first differing carrier count marks the point where a test can have nonzero advantage. Reliable testing of this pair at fixed error would require its own carrier estimate. [Capacity deficit bounds](../science/growing-diagnostics.md#4-bounding-the-capacity-deficits)
+
+### Certifying capacity with a consecutive block
+
+Let $\mathcal N_n$ be the consecutive $n$-carrier channel and $J(\mathcal N_n)$ its optimized coherent information, written $a_n$ in the proof. Exact charge twirling turns consecutive coding blocks into independent copies of $\mathcal N_n$, which makes $J(\mathcal N_n)/n$ achievable. For the upper bound, the corresponding output twirl uses one classical phase key with $n+1$ possible values per block. Each keyed rotation is reversible given that key. Discarding it reduces coherent information by at most its entropy, $\log_2(n+1)$ bits per block. Additivity for the independent dephasing blocks and the finite-code converse give
+
+```math
+\frac{J(\mathcal N_n)}{n}
+\le Q\le
+\frac{J(\mathcal N_n)+\log_2(n+1)}{n}.
+```
+
+The resulting interval certifies an absolute error of at most $\log_2(n+1)/n$ in logical qubits per carrier. The deficit $1-Q$ can be much smaller than that error. Identical small-block channels yield identical certificates at that block size, even when their deficits are far apart in relative terms. [Finite-block capacity certificate](../science/growing-diagnostics.md#5-an-absolute-capacity-certificate-from-a-finite-channel)
+
 ## 8. A connected reading path
 
-Use the [milestone map](milestones.md) to connect the local objects—phase rotations, charge sectors, entropy, and channel complements—to the full result. The narrative then passes through exact blocking, the two Brownian bounds, reset segments, and the channel comparison. The [science overview](../science/README.md) gives a shorter route directly to the authoritative arguments.
+Use the [milestone map](milestones.md) to connect the local objects of phase rotations, charge sectors, entropy, and channel complements to the full result. The narrative then passes through exact blocking, the two Brownian bounds, reset segments, and the channel comparison. The [science overview](../science/README.md) gives a shorter route directly to the authoritative arguments.
 
-The final synthesis uses the same carrier interface for two tasks. The models agree on every selection of up to three carriers. Their capacity losses differ in the long-train limit, and distinguishing them at fixed error costs a growing train as the noise weakens. The carrier cost depends on how the input is prepared, even with joint reception.
+The final synthesis uses the same carrier interface to identify a noise law and estimate its communication cost. The Brownian/reset pair gives a complete example of the difference between exact distinguishability and reliable testing, including the role of input entanglement depth. The smooth pair shows that the selected-channel agreement can grow. The finite-block certificate explains what a fully characterized consecutive block still determines about the rate.
 
 The [verification guide](../verification/README.md) identifies the finite calculations that check the channel formulas and entropy estimates. Those calculations help expose algebraic mistakes at the tested sizes. The linked analytical arguments establish the universal statements.
